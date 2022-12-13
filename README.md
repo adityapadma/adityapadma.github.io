@@ -4,7 +4,7 @@
 - 👀 I’m interested in Human-Centered Design, User Experience Research, Mixed Reality and Wearable Technologies and their applications in Human-Centered Computer Interaction.
 - 🌱 I’m currently learning Computer Science and Social Science at IIIT Delhi
 - 💞️ I’m looking to collaborate on creating Mixed Reality Applications and Products.
-- 📫 How to reach me aditya20449@iiitd.ac.in
+- 📫 How to reach me [aditya20449@iiitd.ac.in](mailto:aditya20449@iiitd.ac.in)
 
 > I am learning WebDevelopment and will be working on coding a blog/portfolio static websites using eleventy or jekyll or Hugo after my End-Semester exams this december. Till then check out my placeholder [WebSite](https://adityapadma.carrd.co) I made on carrd.co and my [Newsletter](https://adityapadma.substack.com/)
   
