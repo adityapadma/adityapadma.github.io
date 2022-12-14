@@ -1,8 +1,7 @@
-## Notes On Life in IIIT Delhi 
+## Notes On Life in IIIT Delhi
 
 - Assignments
 - Quizzes
 - Exams
 - Projects
-- ...
-
+- 
