@@ -649,3 +649,68 @@
     padding: 1.5rem;
     margin: 2rem 0;
   }
+
+  /* Replace .centered-div with a more specific selector if needed */
+  .centered-div {
+  text-align: center;
+  margin-top: 20px; /* Adjust the margin as needed */
+  font-size: 0px;
+  }
+
+/* Style the social icons if you want */
+  .centered-div a i {
+  width: 30px; /* Adjust the width of the icons as needed */
+  height: 30px; /* Adjust the height of the icons as needed */
+  margin: 10px; /* Adjust the spacing between icons as needed */
+  font-size: 30px;
+  }
+
+
+  /* Reset default styles for consistency */
+.markdown-style {
+  line-height: 1.6;
+  font-size: 16px;
+  color: #FFFFFF; /* Set font color to white */
+}
+
+.markdown-style h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.markdown-style p {
+  margin: 0 0 20px;
+}
+
+.markdown-style ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.markdown-style li {
+  margin-bottom: 5px;
+}
+
+.markdown-style a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.markdown-style a:hover {
+  text-decoration: underline;
+}
+
+.markdown-style em {
+  font-style: italic;
+}
+
+.markdown-style strong {
+  font-weight: bold;
+}
+
+.markdown-style underline {
+ font-style: underline;
+}
+
+
