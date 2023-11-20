@@ -1,5 +1,5 @@
 all:
 	git add .
-	git status # Lists all new or modified files to be committed
+	git status 
 	git commit -m "Second commit"
-	git push -u origin master
+	git push -u origin
