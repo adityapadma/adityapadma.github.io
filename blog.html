@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="description" content="Aditya Padmagirwar's Personal Website">
+    
+    <meta name="keywords" content="Aditya Padmagirwar, Aditya, Padmagirwar, IIIT Delhi, IIITD, Creative Interfaces Lab, CILab, Human-Computer Interaction, HCI, Mixed Reality, Tangible User Interfaces, Wearable Technologies, Game Development, Filmmaking, Visual-Interactive Storytelling">
+
+    <meta name="author" content="Aditya Padmagirwar">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        .rainbow {
+                text-decoration: underline;
+                font-size: 20px;
+        }
+        .rainbow_text_animated {
+            background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbow_animation 6s ease-in-out infinite;
+            background-size: 400% 100%;
+        }
+
+        @keyframes rainbow_animation {
+            0%,100% {
+                background-position: 0 0;
+            }
+
+            50% {
+                background-position: 100% 0;
+            }
+        }
+
+        .starwars {
+            cursor: url('media/cursor.cur'), auto;
+        }
+
+    
+    </style>
+
+    <title>About Me</title>
+    
+</head>
+<body>
+    <div >
+    <div class="starwars">
+        <h1> <span id="hellothere">Hello There!</span> <span id="kenobi" font-size='10px'>(*general kenobi)</span></h1>
+    </div>
+    <hr>
+    <ul>
+        <li>📫 My Email - <a href="mailto:aditya20449@iiitd.ac.in">aditya20449@iiitd.ac.in</a></li>
+        <li>🗞️ Recursive Link <a href="/blog.html">Click Here</a>
+    </ul>
+    
+    <script>
+        var generalKenobiAudio = new Audio('media/general-kenobi.mp3');
+        var helloThereAudio = new Audio('media/hello-there.mp3');
+
+        // Play "hello there" audio when the document has loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            helloThereAudio.play();
+        });
+
+        document.getElementById('kenobi').addEventListener('mouseover', function() {
+            generalKenobiAudio.play();
+        });
+
+        document.getElementById('hellothere').addEventListener('mouseover', function() {
+            helloThereAudio.play();
+        });
+    </script>
+
+</body>
+</html>
