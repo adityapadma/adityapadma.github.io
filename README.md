@@ -1,6 +1,6 @@
 ## FILES FOR MY GITHUB PAGES PERSONAL WEBSITE
 
-- Hello There! (*general kenobi)
+- Hello There! (*General Kenobi)
 
 - 👋 Hi, I’m *Aditya Padmagirwar*, A Sophomore Computer Science and Social Science Engineering Undergraduate at [IIIT Delhi](https://www.iiitd.ac.in/)
 - 👀 I’m interested in Human-Centered Design, User Experience Research, Mixed Reality and Wearable Technologies and their applications in Human-Centered Computer Interaction.

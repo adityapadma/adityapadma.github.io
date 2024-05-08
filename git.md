@@ -13,3 +13,5 @@ But there are 3 things that I am broadly interested in and want to work in these
 Design; Movies; F1; Space Exploration;
 Story Telling; Game Design and Development.
 https://adityapadma.github.io
+
+- Edited Somethings to check if the changes are reflected in the website.
