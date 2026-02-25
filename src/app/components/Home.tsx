@@ -70,6 +70,9 @@ export function Home() {
           to { opacity: 1; transform: translateY(0); }
         }
         .fade-in { animation: fadeInUp 0.5s ease both; }
+        .page-card, .page-card *, .page-card:hover, .page-card:visited {
+          text-decoration: none !important;
+        }
         .page-card {
           display: flex;
           align-items: center;
@@ -77,7 +80,6 @@ export function Home() {
           padding: 1rem 1.2rem;
           border: 1px solid var(--ap-border);
           border-radius: 8px;
-          text-decoration: none;
           color: var(--ap-text);
           transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
           background: var(--ap-accent-bg);
@@ -140,21 +142,12 @@ export function Home() {
           animationDelay: "0.05s",
         }}
       >
-        <Link to="/blog" className="page-card">
+        <Link to="/blog" className="page-card" style={{ textDecoration: "none", textDecorationLine: "none" }}>
           <span className="page-card-icon">📝</span>
           <div>
             <div style={{ fontWeight: 600, fontSize: "1rem" }}>Read the Blog</div>
             <div style={{ fontSize: "0.82rem", color: "var(--ap-text-light)", marginTop: "0.15rem" }}>
               Thoughts on HCI, design & digital futures
-            </div>
-          </div>
-        </Link>
-        <Link to="/game" className="page-card">
-          <span className="page-card-icon">🎮</span>
-          <div>
-            <div style={{ fontWeight: 600, fontSize: "1rem" }}>Play a Game</div>
-            <div style={{ fontSize: "0.82rem", color: "var(--ap-text-light)", marginTop: "0.15rem" }}>
-              Defend the Republic — a space shooter
             </div>
           </div>
         </Link>
@@ -167,7 +160,7 @@ export function Home() {
             href="https://adityasletters.substack.com/"
             target="_blank"
             rel="noreferrer"
-            style={{ color: "var(--ap-accent)" }}
+            style={{ color: "var(--ap-accent)", textDecoration: "none"}}
           >
             Aditya's Letters
           </a>
@@ -200,7 +193,7 @@ export function Home() {
             href="https://adityapadma.github.io/ap-autoCV"
             target="_blank"
             rel="noreferrer"
-            style={{ color: "var(--ap-accent)" }}
+            style={{ color: "var(--ap-accent)", textDecoration: "none" }}
           >
             here
           </a>

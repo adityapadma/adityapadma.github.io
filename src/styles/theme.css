@@ -119,6 +119,11 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Unlayered — always beats any @layer rule (including Tailwind preflight) */
+a, a:hover, a:visited, a:active {
+  text-decoration: none !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

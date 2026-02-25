@@ -1,7 +1,25 @@
+import { useState, useEffect } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
+
+type Theme = "light" | "dark";
+
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") return "light";
+  const stored = localStorage.getItem("theme") as Theme | null;
+  if (stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
 
 export function Layout() {
   const location = useLocation();
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
   return (
     <div
@@ -14,23 +32,21 @@ export function Layout() {
       }}
     >
       <style>{`
-        :root {
-          --ap-bg: #ffffff;
-          --ap-accent-bg: #f5f7ff;
-          --ap-text: #212121;
-          --ap-text-light: #585858;
-          --ap-border: #898EA4;
-          --ap-accent: #0d47a1;
+        :root, [data-theme="light"] {
+          --ap-bg: #fdf6e3;
+          --ap-accent-bg: #eee8d5;
+          --ap-text: #586e75;
+          --ap-text-light: #93a1a1;
+          --ap-border: #93a1a1;
+          --ap-accent: #268bd2;
         }
-        @media (prefers-color-scheme: dark) {
-          :root {
-            --ap-bg: #212121;
-            --ap-accent-bg: #2b2b2b;
-            --ap-text: #dcdcdc;
-            --ap-text-light: #ababab;
-            --ap-border: #4a4f6a;
-            --ap-accent: #91b6e0;
-          }
+        [data-theme="dark"] {
+          --ap-bg: #212121;
+          --ap-accent-bg: #2b2b2b;
+          --ap-text: #dcdcdc;
+          --ap-text-light: #ababab;
+          --ap-border: #4a4f6a;
+          --ap-accent: #91b6e0;
         }
         @keyframes rainbow_animation {
           0%, 100% { background-position: 0 0; }
@@ -98,12 +114,13 @@ export function Layout() {
               fontSize: "1rem",
               color: "var(--ap-text)",
               textDecoration: "none",
+              textDecorationLine: "none",
               letterSpacing: "0.01em",
             }}
           >
             Aditya Padmagirwar
           </NavLink>
-          <nav style={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
+          <nav style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.15rem" }}>
             <NavLink
               to="/"
               end
@@ -121,14 +138,25 @@ export function Layout() {
             >
               Blog
             </NavLink>
-            <NavLink
-              to="/game"
-              className={({ isActive }) =>
-                `ap-nav-link${isActive ? " active" : ""}`
-              }
+            <button
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              style={{
+                background: "none",
+                border: "1px solid var(--ap-border)",
+                borderRadius: "5px",
+                padding: "0.2rem 0.55rem",
+                cursor: "pointer",
+                fontSize: "1.05rem",
+                lineHeight: 1,
+                color: "var(--ap-text)",
+                marginLeft: "0.2rem",
+                transition: "border-color 0.15s",
+              }}
             >
-              Game
-            </NavLink>
+              {theme === "dark" ? "☀️" : "🌙"}
+            </button>
           </nav>
         </div>
       </header>

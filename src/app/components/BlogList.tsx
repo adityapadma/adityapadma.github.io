@@ -18,12 +18,14 @@ export function BlogList() {
     <div style={{ maxWidth: "45rem", margin: "0 auto", padding: "1.5rem 1.25rem 4rem" }}>
       <style>{`
         .ap-hr { border: none; height: 1px; background: var(--ap-border); margin: 1rem 0; }
+        .blog-card, .blog-card *, .blog-card:hover, .blog-card:visited {
+          text-decoration: none !important;
+        }
         .blog-card {
           display: block;
           padding: 1.1rem 1.2rem;
           border: 1px solid var(--ap-border);
           border-radius: 8px;
-          text-decoration: none;
           color: var(--ap-text);
           background: var(--ap-accent-bg);
           transition: border-color 0.18s, box-shadow 0.18s, transform 0.12s;
@@ -114,7 +116,7 @@ export function BlogList() {
             key={post.slug}
             to={`/blog/${post.slug}`}
             className="blog-card fade-in"
-            style={{ animationDelay: `${i * 0.07}s` }}
+            style={{ animationDelay: `${i * 0.07}s`, textDecoration: "none", textDecorationLine: "none" }}
           >
             <div className="blog-card-title">{post.title}</div>
             <div className="blog-card-meta">

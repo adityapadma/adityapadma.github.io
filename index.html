@@ -23,9 +23,28 @@
       <meta name="twitter:site" content="@aadityapadma" />
       <meta name="twitter:title" content="Aditya Padmagirwar — Portfolio" />
       <meta name="twitter:description" content="Computer Science & Social Science student at IIIT-Delhi exploring Tangible User Interfaces, Ubiquitous Computing, and interactive digital narratives." />
+
+      <style>
+        /* Global link underline kill — loaded first, highest priority */
+        a, a:link, a:visited, a:hover, a:active, a:focus,
+        a *, a:link *, a:visited *, a:hover *, a:active * {
+          text-decoration: none !important;
+          -webkit-text-decoration: none !important;
+          text-decoration-line: none !important;
+        }
+      </style>
     </head>
 
     <body>
+      <script>
+        // Set theme before paint to prevent flash
+        (function() {
+          var t = localStorage.getItem('theme');
+          if (t !== 'light' && t !== 'dark')
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', t);
+        })();
+      </script>
       <div id="root"></div>
       <script type="module" src="/src/main.tsx"></script>
     </body>
