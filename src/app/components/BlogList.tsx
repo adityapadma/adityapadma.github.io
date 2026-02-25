@@ -103,23 +103,6 @@ export function BlogList() {
 
       <div className="ap-hr" style={{ marginTop: "1.2rem" }} />
 
-      {/* Add-a-post hint */}
-      <div
-        style={{
-          background: "var(--ap-accent-bg)",
-          border: "1px dashed var(--ap-border)",
-          borderRadius: "7px",
-          padding: "0.75rem 1rem",
-          marginBottom: "1.4rem",
-          fontSize: "0.82rem",
-          color: "var(--ap-text-light)",
-        }}
-      >
-        📁 Drop a <code style={{ fontSize: "0.8rem" }}>.md</code> file into{" "}
-        <code style={{ fontSize: "0.8rem" }}>/src/blogs/</code> with YAML frontmatter
-        and it will appear here automatically.
-      </div>
-
       {/* Post list */}
       {blogs.length === 0 ? (
         <p style={{ color: "var(--ap-text-light)", textAlign: "center", marginTop: "3rem" }}>
