@@ -131,6 +131,14 @@ export function Layout() {
               Home
             </NavLink>
             <NavLink
+              to="/portfolio"
+              className={({ isActive }) =>
+                `ap-nav-link${isActive ? " active" : ""}`
+              }
+            >
+              Portfolio
+            </NavLink>
+            <NavLink
               to="/blog"
               className={({ isActive }) =>
                 `ap-nav-link${isActive ? " active" : ""}`

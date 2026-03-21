@@ -4,6 +4,7 @@ import { Home } from "./components/Home";
 import { BlogList } from "./components/BlogList";
 import { BlogPost } from "./components/BlogPost";
 import { NotFound } from "./components/NotFound";
+import { Portfolio } from "./components/Portfolio";
 
 export const router = createBrowserRouter([
   {
@@ -16,4 +17,5 @@ export const router = createBrowserRouter([
       { path: "*", Component: NotFound },
     ],
   },
+  { path: "/portfolio", Component: Portfolio },
 ]);
