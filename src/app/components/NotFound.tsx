@@ -2,6 +2,7 @@ import { Link } from "react-router";
 
 export function NotFound() {
   return (
+    
     <div
       style={{
         maxWidth: "45rem",
@@ -10,11 +11,33 @@ export function NotFound() {
         textAlign: "center",
       }}
     >
-      <div style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>🌌</div>
-      <h1 style={{ fontSize: "2.5rem", margin: "0 0 0.5rem" }}>404</h1>
-      <p style={{ color: "var(--ap-text-light)", marginBottom: "1.5rem" }}>
-        These aren't the droids you're looking for.
-      </p>
+      
+      <div
+        style={{
+          fontSize: "2.5rem",
+          marginBottom: "0.5rem",
+          fontFamily: "'JetBrains Mono', monospace",
+        }}
+      >
+        🌌 404 Error: Page Not Found
+      </div>
+      
+      
+      <div
+        style={{
+          marginBottom: "1.5rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <img
+          src="https://media1.tenor.com/m/TlfAvuz0tLMAAAAd/obi-wan-kenobi-these-are-not-the-droids.gif"
+          alt="These aren't the droids you're looking for"
+          style={{ maxWidth: "100%", borderRadius: "8px" }}
+        />
+      </div>
+      
+      
       <Link
         to="/"
         style={{
