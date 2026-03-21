@@ -116,8 +116,16 @@ export function Layout() {
               textDecoration: "none",
               textDecorationLine: "none",
               letterSpacing: "0.01em",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
             }}
           >
+            <img
+              src="/favicons/favicon-32x32.png"
+              alt="Logo"
+              style={{ width: "24px", height: "24px", borderRadius: "4px" }}
+            />
             Aditya Padmagirwar
           </NavLink>
           <nav style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.15rem" }}>
