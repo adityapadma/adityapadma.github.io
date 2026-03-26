@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 
 type Theme = "light" | "dark";
@@ -13,11 +13,26 @@ function getInitialTheme(): Theme {
 export function Layout() {
   const location = useLocation();
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [menuOpen]);
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
@@ -75,6 +90,75 @@ export function Layout() {
           border-color: var(--ap-accent);
           color: var(--ap-accent);
         }
+        .ap-nav-link-mobile {
+          display: block;
+          padding: 0.15rem 0.9rem;
+          margin: 0.1rem 0;
+          color: var(--ap-text);
+          text-decoration: none;
+          font-size: 0.95rem;
+          border: 1px solid var(--ap-border);
+          border-radius: 5px;
+          transition: border-color 0.15s, color 0.15s;
+        }
+        .ap-nav-link-mobile:hover, .ap-nav-link-mobile.active {
+          border-color: var(--ap-accent);
+          color: var(--ap-accent);
+        }
+        .ap-hamburger {
+          display: none;
+          background: none;
+          border: 1px solid var(--ap-border);
+          border-radius: 5px;
+          padding: 0.2rem 0.55rem;
+          cursor: pointer;
+          font-size: 1.25rem;
+          color: var(--ap-text);
+          transition: border-color 0.15s;
+          line-height: 1;
+          align-items: center;
+          justify-content: center;
+        }
+        .ap-hamburger:hover {
+          border-color: var(--ap-accent);
+        }
+        .ap-desktop-nav {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.15rem;
+        }
+        .ap-menu-container {
+          position: relative;
+        }
+        .ap-dropdown-menu {
+          position: fixed;
+          top: 3.5rem;
+          right: 1rem;
+          background: var(--ap-accent-bg);
+          border: 1px solid var(--ap-border);
+          border-radius: 5px;
+          min-width: 200px;
+          padding: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          z-index: 100;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .ap-dropdown-menu-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 99;
+        }
+        @media (max-width: 640px) {
+          .ap-desktop-nav {
+            display: none;
+          }
+          .ap-hamburger {
+            display: flex;
+          }
+        }
         .ap-body {
           max-width: 45rem;
           margin: 0 auto;
@@ -128,7 +212,9 @@ export function Layout() {
             />
             Aditya Padmagirwar
           </NavLink>
-          <nav style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.15rem" }}>
+          
+          {/* Desktop Navigation */}
+          <nav className="ap-desktop-nav">
             <NavLink
               to="/"
               end
@@ -174,6 +260,84 @@ export function Layout() {
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
           </nav>
+
+          {/* Mobile Navigation Dropdown Menu */}
+          <div className="ap-menu-container" ref={menuRef}>
+            <button
+              className="ap-hamburger"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle navigation menu"
+              title="Toggle navigation menu"
+            >
+              ☰
+            </button>
+            {menuOpen && (
+              <>
+                <div className="ap-dropdown-menu-overlay" onClick={() => setMenuOpen(false)} />
+                <div className="ap-dropdown-menu">
+                  <NavLink
+                    to="/"
+                    end
+                    onClick={() => setMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `ap-nav-link-mobile${isActive ? " active" : ""}`
+                    }
+                  >
+                    Home
+                  </NavLink>
+                  <NavLink
+                    to="/portfolio"
+                    onClick={() => setMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `ap-nav-link-mobile${isActive ? " active" : ""}`
+                    }
+                  >
+                    Portfolio
+                  </NavLink>
+                  <NavLink
+                    to="/blog"
+                    onClick={() => setMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `ap-nav-link-mobile${isActive ? " active" : ""}`
+                    }
+                  >
+                    Blog
+                  </NavLink>
+                  <hr style={{ margin: "0.25rem -0.5rem", background: "var(--ap-border)", border: "none", height: "1px" }} />
+                  <button
+                    onClick={() => {
+                      toggleTheme();
+                      setMenuOpen(false);
+                    }}
+                    style={{
+                      background: "none",
+                      border: "1px solid var(--ap-border)",
+                      padding: "0.15rem 0.9rem",
+                      margin: "0.1rem 0",
+                      cursor: "pointer",
+                      fontSize: "0.95rem",
+                      lineHeight: 1,
+                      color: "var(--ap-text)",
+                      borderRadius: "5px",
+                      textAlign: "left",
+                      transition: "border-color 0.15s, color 0.15s",
+                      width: "100%",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "var(--ap-accent)";
+                      e.currentTarget.style.color = "var(--ap-accent)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "var(--ap-border)";
+                      e.currentTarget.style.color = "var(--ap-text)";
+                    }}
+                  >
+                    {theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </header>
 

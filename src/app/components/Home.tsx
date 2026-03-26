@@ -59,6 +59,27 @@ const interests = [
   "New Media Studies",
 ];
 
+const spotifyNowPlayingEmbedUrl =
+  "https://open.spotify.com/embed/track/11dFghVXANMlKmJXsNCbNl?utm_source=generator";
+
+const bookNowReading = {
+  title: "The Midnight Library",
+  author: "Matt Haig",
+  firstPublished: 2020,
+  editionCount: 25,
+  coverUrl: "https://covers.openlibrary.org/b/id/10313767-L.jpg",
+  sourceUrl: "https://openlibrary.org/works/OL20965973W/The_Midnight_Library",
+};
+
+const movieRecentlyWatched = {
+  title: "Paul",
+  year: 2011,
+  cast: "Simon Pegg, Nick Frost",
+  posterUrl:
+    "https://m.media-amazon.com/images/M/MV5BOGIyZDNhODctYzg3ZS00YjVmLWE4NGEtYjM5OGM2MmQxYThmXkEyXkFqcGc@._V1_.jpg",
+  sourceUrl: "https://www.imdb.com/title/tt1092026/",
+};
+
 export function Home() {
   return (
     <div className="ap-body" style={{ paddingTop: "2rem", paddingBottom: "4rem" }}>
@@ -110,6 +131,46 @@ export function Home() {
         }
         .social-link:hover {
           color: var(--ap-accent);
+        }
+        .garden-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 0.9rem;
+        }
+        .media-card {
+          border: 1px solid var(--ap-border);
+          border-radius: 10px;
+          overflow: hidden;
+          background: var(--ap-accent-bg);
+        }
+        .media-cover {
+          width: 100%;
+          height: 220px;
+          object-fit: cover;
+          display: block;
+          background: #eceff3;
+        }
+        .media-copy {
+          padding: 0.8rem 0.85rem 0.95rem;
+        }
+        .media-kicker {
+          margin: 0 0 0.25rem;
+          color: var(--ap-text-light);
+          font-size: 0.78rem;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+        }
+        .media-title {
+          margin: 0;
+          font-weight: 600;
+          font-size: 1rem;
+          line-height: 1.35;
+        }
+        .media-meta {
+          margin: 0.35rem 0 0;
+          color: var(--ap-text-light);
+          font-size: 0.83rem;
+          line-height: 1.5;
         }
       `}</style>
 
@@ -213,6 +274,82 @@ export function Home() {
             </span>
           ))}
         </div>
+      </div>
+
+      <div className="ap-hr" style={{ marginTop: "1rem", marginBottom: "1rem" }} />
+
+      <div className="fade-in" style={{ marginTop: "1.25rem", animationDelay: "0.18s" }}>
+        <h5 style={{ margin: "0 0 0.65rem", fontSize: "1.05rem", fontWeight: 600 }}>
+          Digital Garden
+        </h5>
+        <div className="garden-grid" style={{ marginBottom: "0.9rem" }}>
+          <article className="media-card">
+            <img
+              className="media-cover"
+              src={bookNowReading.coverUrl}
+              alt={`Cover of ${bookNowReading.title}`}
+              loading="lazy"
+            />
+            <div className="media-copy">
+              <p className="media-kicker">Book I am reading now</p>
+              <p className="media-title">{bookNowReading.title}</p>
+              <p className="media-meta">
+                By {bookNowReading.author} • First published {bookNowReading.firstPublished}
+              </p>
+              <p className="media-meta">{bookNowReading.editionCount} editions listed on Open Library</p>
+              <a
+                href={bookNowReading.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "var(--ap-accent)", fontSize: "0.83rem" }}
+              >
+                View source
+              </a>
+            </div>
+          </article>
+
+          <article className="media-card">
+            <img
+              className="media-cover"
+              src={movieRecentlyWatched.posterUrl}
+              alt={`Poster of ${movieRecentlyWatched.title}`}
+              loading="lazy"
+            />
+            <div className="media-copy">
+              <p className="media-kicker">Movie I watched recently</p>
+              <p className="media-title">
+                {movieRecentlyWatched.title} ({movieRecentlyWatched.year})
+              </p>
+              <p className="media-meta">Cast: {movieRecentlyWatched.cast}</p>
+              <a
+                href={movieRecentlyWatched.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "var(--ap-accent)", fontSize: "0.83rem" }}
+              >
+                View source
+              </a>
+            </div>
+          </article>
+        </div>
+        <p style={{ margin: "0 0 0.5rem", color: "var(--ap-text-light)", fontSize: "0.88rem" }}>
+          Album I am listening to now: <strong>Paravaana EP by Chaar Diwari</strong>
+        </p>
+        <p style={{ margin: "0 0 0.5rem", color: "var(--ap-text-light)", fontSize: "0.88rem" }}>
+          Now Playing:
+        </p>
+            <iframe
+              data-testid="embed-iframe"
+              title="Spotify now playing"
+              style={{ borderRadius: "12px" }}
+              src="https://open.spotify.com/embed/album/5haaCvmWOSBI362b3NRdZk?utm_source=generator"
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allowFullScreen
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
       </div>
 
       <div className="ap-hr" style={{ marginTop: "1.5rem" }} />
