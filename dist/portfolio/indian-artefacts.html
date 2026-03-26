@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing, Watching, Telling | Design Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        vernacular: {
+                            sand: '#F7F4F0',
+                            wood: '#3E2723',
+                            terracotta: '#D85A42',
+                            brass: '#C59B27',
+                            charcoal: '#1A1A1A'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #F7F4F0; color: #1A1A1A; }
+        .shell {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.2rem;
+        }
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(8px);
+            background: rgba(246, 244, 241, 0.82);
+            border-bottom: 1px solid rgba(31, 31, 31, 0.1);
+        }
+        .topbar-inner {
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .signature {
+            margin: 0;
+            font-family: 'Manrope', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            color: #333;
+            position: relative;
+        }
+        .signature-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            object-fit: cover;
+            display: inline-block;
+            border: 1px solid rgba(31, 31, 31, 0.15);
+            flex-shrink: 0;
+        }
+        .signature-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            color: inherit;
+            text-decoration: none;
+        }
+        .signature-home:focus-visible {
+            outline: 2px solid rgba(229, 112, 27, 0.45);
+            outline-offset: 4px;
+            border-radius: 8px;
+        }
+        .menu {
+            display: flex;
+            gap: clamp(0.7rem, 1.4vw, 1.8rem);
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .menu a {
+            text-decoration: none;
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #64615d;
+            transition: color 180ms ease;
+        }
+        .menu a:hover,
+        .menu a:focus-visible {
+            color: #e5701b;
+            outline: none;
+        }
+        .page-section {
+            min-height: 100vh;
+            position: relative;
+        }
+        .section-next {
+            position: absolute;
+            bottom: 3rem;
+            left: 10vw;
+            color: #C59B27;
+            font-size: 1.5rem;
+            line-height: 1;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            z-index: 20;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .section-next:hover {
+            opacity: 0.75;
+            transform: translateY(2px);
+        }
+        .section-next:focus-visible {
+            outline: 2px solid #C59B27;
+            outline-offset: 4px;
+            border-radius: 999px;
+        }
+        .texture-overlay {
+            position: relative;
+        }
+        .texture-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+            pointer-events: none;
+        }
+        .image-placeholder {
+            background-color: #E5E0D8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: multiply;
+            opacity: 0.9;
+            transition: transform 0.7s ease;
+        }
+        .image-placeholder:hover img {
+            transform: scale(1.05);
+        }
+        @media (max-width: 720px) {
+            .topbar-inner {
+                min-height: auto;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-top: 0.35rem;
+                padding-bottom: 0.45rem;
+            }
+            .menu {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .menu a {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-vernacular-terracotta selection:text-white">
+
+    <header class="topbar">
+        <div class="shell topbar-inner">
+            <h1 class="signature"><a class="signature-home" href="/portfolio/index.html" aria-label="Reload homepage"><img class="signature-icon" src="/portfolio/media/me.png" alt=""> Aditya Padmagirwar</a></h1>
+            <nav class="menu" aria-label="Primary navigation">
+                <a href="/portfolio/index.html#work">Work</a>
+                <a href="/portfolio/index.html#about">About</a>
+                <a href="/portfolio/index.html#publications">Publications</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <header class="page-section min-h-screen flex flex-col justify-center px-6 md:px-20 lg:px-32 relative texture-overlay border-b border-gray-300">
+        <div class="max-w-4xl pt-20">
+            <p class="text-vernacular-terracotta font-semibold tracking-widest uppercase text-sm mb-6">Design Research Case Study</p>
+            <h1 class="font-serif text-5xl md:text-7xl font-bold leading-tight mb-8 text-vernacular-charcoal">
+                Playing, Watching, Telling.
+            </h1>
+            <p class="text-xl md:text-3xl font-light text-gray-600 leading-relaxed max-w-3xl">
+                Reinterpreting Indian Vernacular Cultures and Artefacts through Digital New Media.
+            </p>
+        </div>
+        <button type="button" class="section-next" aria-label="Go to next section">↓</button>
+    </header>
+
+    <!-- The Problem Space -->
+    <section class="page-section py-24 px-6 md:px-20 lg:px-32 bg-white texture-overlay">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+            <div class="md:col-span-5">
+                <h2 class="font-serif text-4xl font-bold mb-6 text-vernacular-wood">The Problem Space</h2>
+                <div class="w-12 h-1 bg-vernacular-terracotta mb-8"></div>
+            </div>
+            <div class="md:col-span-7">
+                <h3 class="text-2xl font-medium mb-6 leading-snug">Indian vernacular artefacts are not dying because they are undocumented—they are dying because they are no longer experienced.</h3>
+                <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                    A 3D scan cannot capture the soul of the Rajasthani Kaavad, a wooden shrine whose meaning lives in the performer's voice and the physical act of unfolding its panels. Similarly, uploading street Bioscope films to YouTube strips away the shared, collaborative gaze of the audience. 
+                </p>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    This project addresses a critical shift from <strong>documentation</strong> to <strong>experience</strong>. These artefacts are not just objects; they are embodied rituals, gestures, and social contracts. Preserving them is an experiential problem, not an archival one.
+                </p>
+            </div>
+        </div>
+        <button type="button" class="section-next" aria-label="Go to next section">↓</button>
+    </section>
+
+    <!-- The Design Philosophy -->
+    <section class="page-section py-24 px-6 md:px-20 lg:px-32 bg-vernacular-charcoal text-vernacular-sand texture-overlay">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="font-serif text-4xl font-bold mb-4">The Design Philosophy</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Three core patterns emerged for translating traditional artefacts into the digital realm.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Pillar 1 -->
+                <div class="border-t border-vernacular-brass pt-8">
+                    <span class="text-vernacular-brass text-5xl font-serif mb-6 block">01</span>
+                    <h3 class="text-2xl font-semibold mb-4">The Ritual Gesture as Interface</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Moving from 'displaying' heritage to 'performing' it. The interaction itself must mirror the cultural act—whether it's pulling a root to branch a narrative or stacking stones. The gesture precedes the content in significance.
+                    </p>
+                </div>
+                <!-- Pillar 2 -->
+                <div class="border-t border-vernacular-brass pt-8">
+                    <span class="text-vernacular-brass text-5xl font-serif mb-6 block">02</span>
+                    <h3 class="text-2xl font-semibold mb-4">Affective Fidelity over Visual</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Why the feeling matters more than the 3D mesh. We prioritize preserving the emotional and somatic memory of the artefact—the anticipation, the weight, the effort—rather than creating hyper-realistic visual simulations.
+                    </p>
+                </div>
+                <!-- Pillar 3 -->
+                <div class="border-t border-vernacular-brass pt-8">
+                    <span class="text-vernacular-brass text-5xl font-serif mb-6 block">03</span>
+                    <h3 class="text-2xl font-semibold mb-4">The Social Contract</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Artefacts dictate how we interact with each other. A Bioscope requires shared focus; a Kaavad requires a narrator and a patron. Designing for heritage means designing for the collective gaze and shared memory.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="section-next" aria-label="Go to next section">↓</button>
+    </section>
+
+    <!-- The Projects: KaavadBits -->
+    <section class="page-section py-24 bg-vernacular-sand texture-overlay overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-20 lg:px-32">
+            <h2 class="font-serif text-5xl font-bold mb-20 text-center text-vernacular-wood">The Projects</h2>
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="w-full lg:w-1/2 image-placeholder h-[500px] rounded-2xl shadow-2xl">
+                    <!-- Placeholder representing rich, textured wood and glowing LEDs -->
+                    <img src="https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=1470&auto=format&fit=crop" alt="KaavadBits Prototype - Wood and LEDs" class="opacity-80 mix-blend-multiply">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <p class="absolute bottom-6 left-6 text-white font-serif italic">Tangible interactive installation</p>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <div class="inline-block bg-vernacular-terracotta text-white text-xs px-3 py-1 rounded-full uppercase tracking-wide mb-4">Completed</div>
+                    <h3 class="font-serif text-4xl font-bold mb-4 text-vernacular-wood">KaavadBits</h3>
+                    <h4 class="text-xl text-vernacular-brass mb-6 font-medium">Narrative Branching through Tangible Play</h4>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        A reinterpretation of the 400-year-old Rajasthani <em>Kaavad Baanchana</em> storytelling tradition. Instead of recreating the wooden box, KaavadBits embodies the narrator-patron perspective through a diegetic tree.
+                    </p>
+                    <ul class="space-y-4 text-gray-600 mb-8">
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> Users pull physical hanging roots to make binary narrative choices in Panchatantra fables.</li>
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> Interaction involves placing NFC-enabled character figurines on an oscillating platform.</li>
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> Validated through a pilot study achieving an above-average <strong>System Usability Scale (SUS) score of 78.75</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="section-next" aria-label="Go to next section">↓</button>
+    </section>
+
+    <!-- The Projects: VR Lagori -->
+    <section class="page-section py-24 bg-vernacular-sand texture-overlay overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-20 lg:px-32">
+            <div class="flex flex-col lg:flex-row-reverse items-center gap-16">
+                <div class="w-full lg:w-1/2 image-placeholder h-[500px] rounded-2xl shadow-2xl">
+                    <!-- Placeholder representing golden hour light and floating stones -->
+                    <img src="https://images.unsplash.com/photo-1518002171953-a080ee817e1f?q=80&w=1470&auto=format&fit=crop" alt="Abstract stones and lighting representing VR Lagori" class="opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <p class="absolute bottom-6 left-6 text-white font-serif italic">Immersive VR somatic experience</p>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <div class="inline-block border border-vernacular-brass text-vernacular-brass text-xs px-3 py-1 rounded-full uppercase tracking-wide mb-4">In Development</div>
+                    <h3 class="font-serif text-4xl font-bold mb-4 text-vernacular-wood">VR Lagori: The Nostalgic Stack</h3>
+                    <h4 class="text-xl text-vernacular-brass mb-6 font-medium">Activating Somatic Motor Memory</h4>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        A poetic reinterpretation of the traditional seven-stone street game. Designed not as a literal simulation, but as a memory space for young adults, relying heavily on the physical weight and spatial presence of VR.
+                    </p>
+                    <ul class="space-y-4 text-gray-600 mb-8">
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> Uses VR hand controllers to invoke the full-body engagement of bending, reaching, precision stacking, and throwing.</li>
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> Utilizes 'memory echoes'—abstract sound layers, light ripples, and ghost-like streaks—rather than literal flashbacks.</li>
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> Emotional payoff relies entirely on intrinsic physical action, devoid of points or scoring systems.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="section-next" aria-label="Go to next section">↓</button>
+    </section>
+
+    <!-- The Projects: VR Bioscope -->
+    <section class="page-section py-24 bg-vernacular-sand texture-overlay overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-20 lg:px-32">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="w-full lg:w-1/2 image-placeholder h-[500px] rounded-2xl shadow-2xl">
+                    <!-- Placeholder representing vintage mechanical elements mixed with lenses -->
+                    <img src="https://images.unsplash.com/photo-1582208152140-1bc6235b2aeb?q=80&w=1470&auto=format&fit=crop" alt="Vintage camera lens and mechanical parts" class="opacity-80 mix-blend-multiply">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <p class="absolute bottom-6 left-6 text-white font-serif italic">Hybrid mechanical-VR artefact</p>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <div class="inline-block bg-gray-300 text-gray-700 text-xs px-3 py-1 rounded-full uppercase tracking-wide mb-4">Proposed</div>
+                    <h3 class="font-serif text-4xl font-bold mb-4 text-vernacular-wood">VR Bioscope</h3>
+                    <h4 class="text-xl text-vernacular-brass mb-6 font-medium">Restoring the Collaborative Gaze</h4>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        The essence of the Indian street Bioscope was the shared crouch, the anticipation of the manual crank, and looking together. This hybrid artefact replaces peepholes with VR headsets while retaining the mechanical physical crank.
+                    </p>
+                    <ul class="space-y-4 text-gray-600 mb-8">
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> The physical crank acts as the primary embodied input, controlling the pace and resistance of the VR animation.</li>
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> <strong>Innovation:</strong> Animation is triggered only through the <em>collaborative gaze</em> of 2-3 simultaneous users looking at the same point.</li>
+                        <li class="flex items-start"><span class="text-vernacular-terracotta mr-3">✦</span> Transforms the act of solitary watching back into a collective performative ritual.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="section-next" aria-label="Go to next section">↓</button>
+    </section>
+
+    <!-- Reflection & Impact -->
+    <section class="page-section py-32 px-6 md:px-20 lg:px-32 bg-white texture-overlay border-t border-gray-200 text-center">
+        <div class="max-w-4xl mx-auto">
+            <svg class="w-12 h-12 mx-auto text-vernacular-terracotta mb-8 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15 8H21L16 12L18 18L12 15L6 18L8 12L3 8H9L12 2Z"></path></svg>
+            <h2 class="font-serif text-4xl font-bold mb-8 text-vernacular-charcoal">Nostalgia as an Interface</h2>
+            <p class="text-xl md:text-2xl font-light text-gray-600 leading-relaxed mb-10">
+                This research reframes <em>nostalgia</em>—not as a surface aesthetic, but as a primary interaction modality. By using the body’s memory of a cultural gesture as the entry point, we bridge the gap between traditional heritage and contemporary urban audiences. 
+            </p>
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                Interaction design is a necessary partner to archival practice. To keep vernacular culture alive, we must design tools that allow us not just to look at the past, but to continuously <strong>perform</strong> it.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        (function () {
+            const sections = Array.from(document.querySelectorAll('.page-section'));
+
+            function getClosestSectionIndex() {
+                let closestIndex = 0;
+                let minDistance = Number.POSITIVE_INFINITY;
+
+                sections.forEach(function (section, index) {
+                    const distance = Math.abs(section.getBoundingClientRect().top);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestIndex = index;
+                    }
+                });
+
+                return closestIndex;
+            }
+
+            function goToSection(index) {
+                if (index < 0 || index >= sections.length) {
+                    return;
+                }
+                sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            sections.forEach(function (section, index) {
+                const nextButton = section.querySelector('.section-next');
+                if (!nextButton) {
+                    return;
+                }
+                nextButton.addEventListener('click', function () {
+                    goToSection(index + 1);
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.defaultPrevented) {
+                    return;
+                }
+
+                const activeTag = document.activeElement && document.activeElement.tagName;
+                const isTypingContext = activeTag === 'INPUT' || activeTag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable);
+                if (isTypingContext) {
+                    return;
+                }
+
+                const currentIndex = getClosestSectionIndex();
+                if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    goToSection(currentIndex + 1);
+                }
+                if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    goToSection(currentIndex - 1);
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

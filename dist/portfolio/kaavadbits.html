@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Document metadata and external dependencies -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaavadBits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Lora for a classic storytelling feel, Inter for clean modern UI text -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#F7F4F0',
+                            100: '#f2e8e5',
+                            500: '#c05621', // A rich terracotta/wood tone inspired by Kaavad art
+                            600: '#9c4221',
+                            900: '#4a2311',
+                        }
+                    }
+                }
+            }
+        }
+
+    </script>
+    <!-- Page-level custom styles and scroll behavior -->
+    
+    <style>
+        html {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+        body {
+            min-height: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+        }
+        .shell {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.2rem;
+        }
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(8px);
+            background: rgba(246, 244, 241, 0.82);
+            border-bottom: 1px solid rgba(31, 31, 31, 0.1);
+        }
+        .topbar-inner {
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .signature {
+            margin: 0;
+            font-family: 'Manrope', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            color: #333;
+            position: relative;
+        }
+        .signature-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            object-fit: cover;
+            display: inline-block;
+            border: 1px solid rgba(31, 31, 31, 0.15);
+            flex-shrink: 0;
+        }
+        .signature-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            color: inherit;
+            text-decoration: none;
+        }
+        .signature-home:focus-visible {
+            outline: 2px solid rgba(229, 112, 27, 0.45);
+            outline-offset: 4px;
+            border-radius: 8px;
+        }
+        .menu {
+            display: flex;
+            gap: clamp(0.7rem, 1.4vw, 1.8rem);
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .menu a {
+            text-decoration: none;
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #64615d;
+            transition: color 180ms ease;
+        }
+        .menu a:hover,
+        .menu a:focus-visible {
+            color: #e5701b;
+            outline: none;
+        }
+        header,
+        main > section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            padding-top: 6rem;
+            padding-bottom: 3rem;
+        }
+        main > section + section {
+            margin-top: 0 !important;
+        }
+        .image-placeholder {
+            background-image: repeating-linear-gradient(45deg, #f2e8e5 25%, transparent 25%, transparent 75%, #f2e8e5 75%, #f2e8e5), repeating-linear-gradient(45deg, #f2e8e5 25%, #fdf8f6 25%, #fdf8f6 75%, #f2e8e5 75%, #f2e8e5);
+            background-position: 0 0, 10px 10px;
+            background-size: 20px 20px;
+        }
+        .citation-marker {
+            color: #9c4221;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8em;
+        }
+        .citation-marker:hover {
+            text-decoration: underline;
+        }
+        .section-citations a {
+            color: #374151;
+            text-decoration: none;
+        }
+        .section-citations a:hover {
+            color: #4a2311;
+            text-decoration: underline;
+        }
+        #nextSectionArrow {
+            display: inline-block;
+            animation: bounceEveryFiveSeconds 5s infinite;
+            will-change: transform;
+        }
+        @keyframes bounceEveryFiveSeconds {
+            0%, 10%, 100% {
+                transform: translateY(0);
+            }
+            2% {
+                transform: translateY(-12px);
+            }
+            4% {
+                transform: translateY(1px);
+            }
+            6% {
+                transform: translateY(-6px);
+            }
+            8% {
+                transform: translateY(0);
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            #nextSectionArrow {
+                animation: none;
+            }
+        }
+        @media (max-width: 720px) {
+            .topbar-inner {
+                min-height: auto;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-top: 0.35rem;
+                padding-bottom: 0.45rem;
+            }
+            .menu {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .menu a {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-brand-50 text-gray-800 font-sans">
+
+    <!-- Top navigation matching homepage -->
+    <nav class="topbar" aria-label="Primary navigation">
+        <div class="shell topbar-inner">
+            <h1 class="signature"><a class="signature-home" href="/portfolio/index.html" aria-label="Reload homepage"><img class="signature-icon" src="/portfolio/media/me.png" alt=""> Aditya Padmagirwar</a></h1>
+            <nav class="menu" aria-label="Primary navigation">
+                <a href="/portfolio/index.html#work">Work</a>
+                <a href="/portfolio/index.html#about">About</a>
+                <a href="/portfolio/index.html#publications">Publications</a>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero section with title, summary, and cover image placeholder -->
+    <header class="pt-32 pb-16 px-6 md:pt-40 md:pb-24 max-w-5xl mx-auto text-center">
+        <div class="inline-block mb-4 px-3 py-1 rounded-full bg-brand-100 text-brand-900 text-xs font-semibold tracking-wider uppercase">
+            Interaction Design & Cultural Heritage
+        </div>
+        <div class="inline-block mb-4 px-3 py-1 rounded-full bg-brand-100 text-brand-900 text-xs font-semibold tracking-wider uppercase">
+            Storytelling, HCI, & Tangible Interfaces
+        </div>
+
+        <div class="inline-block mb-4 px-3 py-1 rounded-full bg-brand-100 text-brand-900 text-xs font-semibold tracking-wider uppercase">
+            Published
+        </div>
+
+        <h1 class="font-serif text-4xl md:text-6xl text-gray-900 font-medium leading-tight mb-6">
+            KaavadBits: Reimagining a 400-Year-Old Storytelling Tradition
+        </h1>
+        <p class="font-sans text-lg md:text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+            An exploration in Tangible Interactive Storytelling, presented at ACM TEI '24. Bridging the gap between ancient Rajasthani oral heritage and modern multi-sensory interfaces.
+        </p>
+        
+        <!-- Hero media placeholder -->
+        <div class="mt-12 w-full h-64 md:h-96 bg-gray-200 rounded-xl overflow-hidden shadow-lg image-placeholder flex items-center justify-center border border-gray-300">
+            <span class="text-gray-500 font-medium flex flex-col items-center gap-2">
+                <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                [ Hero Image: The final KaavadBits Installation ]
+            </span>
+        </div>
+    </header>
+
+    <!-- Main narrative content sections -->
+    <main class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-6 md:px-0 pb-24 space-y-20">
+
+        <!-- Section 0: Introduction to Kaavad and Kaavad Baachana -->
+        <section class="grid gap-8 md:grid-cols-2 xl:grid-cols-12 items-start">
+            <div class="md:col-span-1 xl:col-span-3 sticky top-24 self-start space-y-4">
+                <h2 class="font-serif text-2xl text-brand-900 border-b border-brand-100 pb-2">0. Kaavad Baachana</h2>
+            </div>
+            <div class="md:col-span-1 xl:col-span-6 space-y-4 text-gray-700 leading-relaxed">
+                <div class="bg-white border border-brand-100 rounded-lg p-6 shadow-sm">
+                    <p class="font-serif text-lg md:text-xl italic text-gray-800 leading-relaxed">
+                        “Story is perhaps the oldest form of communication known to humankind. It has a way of mesmerising the listeners into silence and the tellers into expressing the deepest desires and anxieties of their society, directly or through subversive means." - Nina Sabnani in ‘The Kaavad storytelling tradition of Rajasthan’
+                    </p>
+                </div>
+                <p>
+                    <em>Kaavad</em> is a portable wooden storytelling shrine from Rajasthan, historically carried by a traveling narrator known as the <em>kaavadiya</em>. Its hinged doors, called <em>kivads</em>, open layer by layer to reveal scenes, characters, and episodes as the performance unfolds.
+                </p>
+                <p>
+                    <em>Kaavad baachana</em> (also referred to as <em>kaavad baanchana</em>) is the oral act of reciting these stories to patrons. The tradition is participatory and performative: voice, gesture, object handling, and audience engagement are all integral to the storytelling method.
+                </p>
+                 <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300 mt-6">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 0 Additional Placeholder ]</span>
+                </div>
+                <div class="mt-6 p-6 bg-white border-l-4 border-brand-500 rounded-r-lg shadow-sm">
+                    <h3 class="font-sans font-semibold text-brand-900 mb-2 uppercase tracking-wider text-sm">Why This Matters</h3>
+                    <p class="font-serif text-gray-800 text-lg italic leading-relaxed">
+                        KaavadBits is designed as a contemporary continuation of this tradition: it retains the narrator-patron relationship and ritual structure, while translating it into a tangible, interactive format for present-day audiences.
+                    </p>
+                </div>
+               
+            </div>
+            
+            <div class="md:col-span-2 xl:col-span-3">
+                <div class="section-citations pt-4 border-t border-brand-100">
+                    <h3 class="text-xs uppercase tracking-wider font-semibold text-gray-500">Citations</h3>
+                    <ol class="mt-2 space-y-2 text-sm text-gray-600 leading-relaxed">
+                        <li id="cite-0-25">
+                            [25] Nina Sabnani. 2009. The Kaavad storytelling tradition of Rajasthan. (2009).
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Process section -->
+        <section class="grid gap-8 md:grid-cols-2 xl:grid-cols-12 items-start">
+            <div class="md:col-span-1 xl:col-span-3 sticky top-24 self-start space-y-4">
+                <h2 class="font-serif text-2xl text-brand-900 border-b border-brand-100 pb-2">Design Process</h2>
+            </div>
+            <div class="md:col-span-1 xl:col-span-6 space-y-6 text-gray-700 leading-relaxed">
+                <div class="h-56 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-sm text-gray-500 font-medium">[ Design Process Placeholder 1 ]</span>
+                </div>
+                <div class="h-56 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-sm text-gray-500 font-medium">[ Design Process Placeholder 2 ]</span>
+                </div>
+                 <div class="h-56 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-sm text-gray-500 font-medium">[ Design Process Placeholder 2 ]</span>
+                </div>
+            </div>
+            <div class="md:col-span-2 xl:col-span-3"></div>
+        </section>
+
+        <!-- Section 1: Installation overview -->
+        <section class="grid gap-8 md:grid-cols-2 xl:grid-cols-12 items-start">
+            <div class="md:col-span-1 xl:col-span-3 sticky top-24 self-start space-y-4">
+                <h2 class="font-serif text-2xl text-brand-900 border-b border-brand-100 pb-2">1. Installation Overview</h2>
+                <!-- <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-xs text-gray-500 font-medium">[ Section Image Placeholder ]</span>
+                </div> -->
+            </div>
+            <div class="md:col-span-1 xl:col-span-6 space-y-4">
+                <!-- Citation format guide:
+                     In content: <sup><a href="#cite-1-1" class="citation-marker">[1]</a></sup>
+                     In citations column: <li id="cite-1-1"><a href="URL" target="_blank" rel="noopener noreferrer">[1] Source title</a></li>
+                -->
+                <div class="h-48 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 1 Image Placeholder ]</span>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                    <em>KaavadBits</em> is a tabletop storytelling installation that embodies the narrator-patron perspective of <em>kaavad baanchana</em>, a Rajasthani storytelling tradition dating back roughly 400 years.<sup><a href="#cite-1-1" class="citation-marker">[1]</a></sup> This explainer-led walkthrough introduces the installation's components and demonstrates how users participate in the narrative flow.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    The project reframes the traditional kaavad performance as an interactive stage where narration, tangible objects, and responsive motion work together. Rather than only observing a story, users progressively unlock, activate, and shape key narrative moments through physical interaction.<sup><a href="#cite-1-1" class="citation-marker">[1]</a></sup>
+                </p>
+                <div class="mt-6 p-6 bg-white border-l-4 border-brand-500 rounded-r-lg shadow-sm">
+                    <h3 class="font-sans font-semibold text-brand-900 mb-2 uppercase tracking-wider text-sm">Narrative Intent</h3>
+                    <p class="font-serif text-gray-800 text-lg italic leading-relaxed">
+                        The installation preserves the performative spirit of oral storytelling while giving contemporary audiences agency: users do not just listen, they co-author the unfolding experience through touch, selection, and choice.
+                    </p>
+                </div>
+                <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300 mt-6">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 1 Additional Placeholder ]</span>
+                </div>
+            </div>
+            <div class="md:col-span-2 xl:col-span-3">
+                <div class="section-citations pt-4 border-t border-brand-100">
+                    <h3 class="text-xs uppercase tracking-wider font-semibold text-gray-500">Citations</h3>
+                    <ol class="mt-2 space-y-2 text-sm text-gray-600 leading-relaxed">
+                        <li id="cite-1-1">
+                            <a href="https://www.youtube.com/watch?v=NLAcSmlIbNM" target="_blank" rel="noopener noreferrer">[1] KaavadBits explainer video transcript.</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            
+        </section>
+
+        <!-- Section 2: Components of the installation -->
+        <section class="grid gap-8 md:grid-cols-2 xl:grid-cols-12 items-start">
+            <div class="md:col-span-1 xl:col-span-3 sticky top-24 self-start space-y-4">
+                <h2 class="font-serif text-2xl text-brand-900 border-b border-brand-100 pb-2">2. Installation Components</h2>
+                <!-- <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-xs text-gray-500 font-medium">[ Section Image Placeholder ]</span>
+                </div> -->
+            </div>
+            <div class="md:col-span-1 xl:col-span-6 space-y-4 text-gray-700 leading-relaxed">
+                <div class="h-48 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 2 Image Placeholder ]</span>
+                </div>
+                <p>
+                    The <em>kaavadiya</em> (narrator) is portrayed as a tree so that the narrator is integrated into the story world, since most <em>Panchatantra</em> tales are set in a forest.<sup><a href="#cite-2-1" class="citation-marker">[1]</a></sup> A servo-motor-enabled canopy oscillates during narration to direct audience attention, while an LED matrix running through the branches lights up the currently chosen path.
+                </p>
+                <p>
+                    The canopy also houses special figurines and interaction tokens (apple, mango, pear, and the Bloom of Eternal Tales). A pair of hanging roots allows users to trigger binary branching choices at critical narrative moments.<sup><a href="#cite-2-1" class="citation-marker">[1]</a></sup>
+                </p>
+                <p>
+                    The traditional <em>kivads</em> (doors) are reimagined to represent complete stories and their character sets. The artefact uses four NFC-enabled, laser-cut MDF story blocks and eight character figurines drawn from <em>Panchatantra</em>, with a stage backdrop for images, captions, and prompts. At the center, an oscillating platform with an NFC scanner reacts when contextually important characters are placed on it.<sup><a href="#cite-2-1" class="citation-marker">[1]</a></sup>
+                </p>
+                <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300 mt-6">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 2 Additional Placeholder ]</span>
+                </div>
+            </div>
+            <div class="md:col-span-2 xl:col-span-3">
+                <div class="section-citations pt-4 border-t border-brand-100">
+                    <h3 class="text-xs uppercase tracking-wider font-semibold text-gray-500">Citations</h3>
+                    <ol class="mt-2 space-y-2 text-sm text-gray-600 leading-relaxed">
+                        <li id="cite-2-1">
+                            <a href="https://www.youtube.com/watch?v=NLAcSmlIbNM" target="_blank" rel="noopener noreferrer">[1] KaavadBits explainer video transcript.</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: User interaction task flow -->
+        <section class="grid gap-8 md:grid-cols-2 xl:grid-cols-12 items-start">
+            <div class="md:col-span-1 xl:col-span-3 sticky top-24 self-start space-y-4">
+                <h2 class="font-serif text-2xl text-brand-900 border-b border-brand-100 pb-2">3. Interaction Task Flow</h2>
+                <!-- <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-xs text-gray-500 font-medium">[ Section Image Placeholder ]</span>
+                </div> -->
+            </div>
+            <div class="md:col-span-1 xl:col-span-6 space-y-6 text-gray-700 leading-relaxed">
+                <div class="h-48 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 3 Image Placeholder ]</span>
+                </div>
+                <p>
+                    The interaction begins when users open the <em>kivads</em>, explore the available stories and characters, and reveal the stage area. The narrator then greets the audience and requests a story card with its characters as patronage to begin the enactment.<sup><a href="#cite-3-1" class="citation-marker">[1]</a></sup>
+                </p>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-gray-900 mb-2 font-sans text-lg">Narration and Activation Loop</h3>
+                    <p class="mb-4">
+                        After receiving the Bloom of Eternal Tales token, the narrator begins performing the selected story. Users continue interacting by placing and replacing character figurines on the central platform at prompted moments.
+                    </p>
+                    <p>
+                        This interaction serves two purposes at once: it gives users meaningful agency and keeps audience attention synchronized with narrative emphasis, especially during character dialogue and conflict scenes.<sup><a href="#cite-3-1" class="citation-marker">[1]</a></sup>
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3 mt-6 font-sans text-lg">Choice-Making Moments</h3>
+                    <p class="mb-4">At diverging points, the narrator asks the patron to decide between two options. Users pull one of the hanging roots to commit to a branch:</p>
+                    <ul class="grid gap-3 list-none">
+                        <li class="flex gap-3 items-start">
+                            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-brand-500"></span>
+                            <span><strong>Left root:</strong> choose the first narrative option.</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-brand-500"></span>
+                            <span><strong>Right root:</strong> choose the alternate option.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300 mt-6">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 3 Additional Placeholder ]</span>
+                </div>
+            </div>
+            <div class="md:col-span-2 xl:col-span-3">
+                <div class="section-citations pt-4 border-t border-brand-100">
+                    <h3 class="text-xs uppercase tracking-wider font-semibold text-gray-500">Citations</h3>
+                    <ol class="mt-2 space-y-2 text-sm text-gray-600 leading-relaxed">
+                        <li id="cite-3-1">
+                            <a href="https://www.youtube.com/watch?v=NLAcSmlIbNM" target="_blank" rel="noopener noreferrer">[1] KaavadBits explainer video transcript.</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Branching endings and audience questioning -->
+        <section class="grid gap-8 md:grid-cols-2 xl:grid-cols-12 items-start">
+            <div class="md:col-span-1 xl:col-span-3 sticky top-24 self-start space-y-4">
+                <h2 class="font-serif text-2xl text-brand-900 border-b border-brand-100 pb-2">4. Endings and Reflection</h2>
+                <!-- <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300">
+                    <span class="text-xs text-gray-500 font-medium">[ Section Image Placeholder ]</span>
+                </div> -->
+            </div>
+            <div class="md:col-span-1 xl:col-span-6">
+                <div class="h-48 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300 mb-6">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 4 Image Placeholder ]</span>
+                </div>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Each branch decision changes the remainder of the narrative. In the current artefact, two binary branch points produce four distinct endings, each concluding with a moral insight for the audience.<sup><a href="#cite-4-1" class="citation-marker">[1]</a></sup>
+                </p>
+
+                <div class="space-y-4">
+                    <!-- Core interaction feature cards -->
+                    <div class="group bg-white border border-gray-100 rounded-xl p-5 hover:border-brand-300 hover:shadow-md transition-all duration-300">
+                        <h4 class="font-serif text-lg text-gray-900 mb-1">Moral and Closure</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">After the chosen ending is narrated, the story closes with a moral framing. In the monkey-crocodile arc, the narrative emphasizes vigilance and discernment in relationships, even among close companions.</p>
+                    </div>
+
+                    <div class="group bg-white border border-gray-100 rounded-xl p-5 hover:border-brand-300 hover:shadow-md transition-all duration-300">
+                        <h4 class="font-serif text-lg text-gray-900 mb-1">Question Tokens</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">After the moral, users receive three special tokens: apple (ask the narrator), mango, and pear (ask primary characters). This creates a post-story dialogue layer instead of ending interaction at narration.</p>
+                    </div>
+
+                    <div class="group bg-white border border-gray-100 rounded-xl p-5 hover:border-brand-300 hover:shadow-md transition-all duration-300">
+                        <h4 class="font-serif text-lg text-gray-900 mb-1">Live Q&A Interaction</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">For evaluation, the questioning interaction was implemented using a Wizard-of-Oz approach, allowing patrons to ask follow-up questions such as how trust evolved between the monkey and the crocodile.</p>
+                    </div>
+
+                    <div class="group bg-white border border-gray-100 rounded-xl p-5 hover:border-brand-300 hover:shadow-md transition-all duration-300">
+                        <h4 class="font-serif text-lg text-gray-900 mb-1">Participatory Storytelling Outcome</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">The final experience moves from passive listening to participatory storytelling: users open, choose, place, decide, question, and reflect within a single coherent interaction arc.<sup><a href="#cite-4-1" class="citation-marker">[1]</a></sup></p>
+                    </div>
+                </div>
+                <div class="h-40 rounded-lg image-placeholder flex items-center justify-center p-4 text-center border border-gray-300 mt-6">
+                    <span class="text-sm text-gray-500 font-medium">[ Section 4 Additional Placeholder ]</span>
+                </div>
+            </div>
+            <div class="md:col-span-2 xl:col-span-3">
+                <div class="section-citations pt-4 border-t border-brand-100">
+                    <h3 class="text-xs uppercase tracking-wider font-semibold text-gray-500">Citations</h3>
+                    <ol class="mt-2 space-y-2 text-sm text-gray-600 leading-relaxed">
+                        <li id="cite-4-1">
+                            <a href="https://www.youtube.com/watch?v=NLAcSmlIbNM" target="_blank" rel="noopener noreferrer">[1] KaavadBits explainer video transcript.</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media break for demo video or installation footage -->
+        <section class="w-full">
+            <div class="mb-6">
+                <h2 class="font-serif text-3xl md:text-4xl text-brand-900 mb-2">5. Demo Video</h2>
+                <p class="text-gray-700 leading-relaxed">A walkthrough of the full KaavadBits interaction sequence, from onboarding and branching decisions to the final reflection and Q&A.</p>
+            </div>
+
+            <div class="rounded-xl overflow-hidden shadow-inner border border-gray-300 bg-black">
+                <div class="relative w-full" style="padding-top: 56.25%;">
+                    <iframe
+                        class="absolute inset-0 w-full h-full"
+                        src="https://www.youtube-nocookie.com/embed/NLAcSmlIbNM"
+                        title="KaavadBits interaction demo"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Papers section: Publications, presentations, and gallery -->
+        <section class="w-full">
+            <div class="mb-8">
+                <h2 class="font-serif text-3xl md:text-4xl text-brand-900 mb-3">Papers & Presentations</h2>
+                <p class="text-gray-700 leading-relaxed max-w-3xl">
+                    This project was presented as a research contribution in two major HCI venues. At ACM TEI'24, the work was discussed in the context of tangible interaction and cultural storytelling systems. At IndiaHCI'23, the project received a Special Mention Award for its contribution to culturally grounded interaction design.
+                </p>
+            </div>
+
+
+
+            <div class="grid gap-6 md:grid-cols-2">
+                <article class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <h3 class="font-semibold text-gray-900 text-lg mb-2">ACM TEI'24</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Presented at the ACM International Conference on Tangible, Embedded, and Embodied Interaction (TEI'24), positioning KaavadBits within research on embodied narrative interfaces.
+                    </p>
+                    <span class="inline-block px-3 py-1 rounded-full bg-brand-100 text-brand-900 text-xs font-semibold tracking-wide uppercase">Conference Presentation</span>
+                </article>
+
+                <article class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <h3 class="font-semibold text-gray-900 text-lg mb-2">IndiaHCI'23</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Presented at IndiaHCI'23, where the project received the Special Mention Award for highlighting the role of indigenous storytelling practices in interactive systems design.
+                    </p>
+                    <span class="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold tracking-wide uppercase">Special Mention Award</span>
+                </article>
+            </div>
+
+            <div class="mt-8">
+                <h3 class="font-sans font-semibold text-brand-900 mb-4 uppercase tracking-wider text-sm">Photo Gallery</h3>
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <figure class="bg-white border border-gray-200 rounded-lg p-3">
+                        <div class="h-40 rounded-md image-placeholder flex items-center justify-center text-center border border-gray-300">
+                            <span class="text-xs text-gray-500 font-medium">[ TEI'24 Presentation Photo ]</span>
+                        </div>
+                        <figcaption class="mt-2 text-xs text-gray-600">Presenter and demo setup at ACM TEI'24.</figcaption>
+                    </figure>
+
+                    <figure class="bg-white border border-gray-200 rounded-lg p-3">
+                        <div class="h-40 rounded-md image-placeholder flex items-center justify-center text-center border border-gray-300">
+                            <span class="text-xs text-gray-500 font-medium">[ TEI'24 Audience Interaction ]</span>
+                        </div>
+                        <figcaption class="mt-2 text-xs text-gray-600">Audience interacting with the tangible narrative system.</figcaption>
+                    </figure>
+
+                    <figure class="bg-white border border-gray-200 rounded-lg p-3">
+                        <div class="h-40 rounded-md image-placeholder flex items-center justify-center text-center border border-gray-300">
+                            <span class="text-xs text-gray-500 font-medium">[ IndiaHCI'23 Presentation Photo ]</span>
+                        </div>
+                        <figcaption class="mt-2 text-xs text-gray-600">Project presentation and discussion at IndiaHCI'23.</figcaption>
+                    </figure>
+
+                    <figure class="bg-white border border-gray-200 rounded-lg p-3">
+                        <div class="h-40 rounded-md image-placeholder flex items-center justify-center text-center border border-gray-300">
+                            <span class="text-xs text-gray-500 font-medium">[ Special Mention Award Moment ]</span>
+                        </div>
+                        <figcaption class="mt-2 text-xs text-gray-600">Recognition at IndiaHCI'23: Special Mention Award.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Floating control to jump to the next scroll-snapped section -->
+    <div id="nextSectionButton" style="position: fixed; bottom: 3rem; left: 10vw; color: #c29b28; font-size: 1.5rem; line-height: 1; cursor: pointer; user-select: none; z-index: 60; display: inline-flex; align-items: center; gap: 0.5rem;" aria-label="Go to next section" role="button" tabindex="0"><span id="nextSectionArrow">↓</span><span style="font-size: 0.8rem; color: #6b7280; font-weight: 500;"></span></div>
+
+    <!-- Keyboard and click handlers for section-to-section navigation -->
+    <script>
+        const panelSelectors = 'header, main > section';
+        const panels = Array.from(document.querySelectorAll(panelSelectors));
+        const nextSectionButton = document.getElementById('nextSectionButton');
+
+        const getCurrentPanelIndex = () => {
+            let closestIndex = 0;
+            let closestDistance = Number.POSITIVE_INFINITY;
+            const viewportCenter = window.innerHeight / 2;
+
+            panels.forEach((panel, index) => {
+                const rect = panel.getBoundingClientRect();
+                const panelCenter = rect.top + rect.height / 2;
+                const distance = Math.abs(panelCenter - viewportCenter);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            return closestIndex;
+        };
+
+        const goToPanel = (direction) => {
+            const currentIndex = getCurrentPanelIndex();
+            const targetIndex = Math.max(0, Math.min(panels.length - 1, currentIndex + direction));
+            if (targetIndex !== currentIndex) {
+                panels[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        };
+
+        const handleDown = () => goToPanel(1);
+
+        nextSectionButton.addEventListener('click', handleDown);
+        nextSectionButton.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                handleDown();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') {
+                return;
+            }
+
+            const targetTag = event.target && event.target.tagName;
+            if (targetTag === 'INPUT' || targetTag === 'TEXTAREA' || event.target?.isContentEditable) {
+                return;
+            }
+
+            event.preventDefault();
+            goToPanel(event.key === 'ArrowDown' ? 1 : -1);
+        });
+    </script>
+</body>
+</html>
