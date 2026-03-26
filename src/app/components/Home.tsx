@@ -76,7 +76,7 @@ const movieRecentlyWatched = {
   year: 2011,
   cast: "Simon Pegg, Nick Frost",
   posterUrl:
-    "https://m.media-amazon.com/images/M/MV5BOGIyZDNhODctYzg3ZS00YjVmLWE4NGEtYjM5OGM2MmQxYThmXkEyXkFqcGc@._V1_.jpg",
+    "https://image.tmdb.org/t/p/w500/6K2c9m66e771i9x2Kk9B67Yv5H.jpg",
   sourceUrl: "https://www.imdb.com/title/tt1092026/",
 };
 
@@ -280,7 +280,7 @@ export function Home() {
 
       <div className="fade-in" style={{ marginTop: "1.25rem", animationDelay: "0.18s" }}>
         <h5 style={{ margin: "0 0 0.65rem", fontSize: "1.05rem", fontWeight: 600 }}>
-          Digital Garden
+          My Digital Garden
         </h5>
         <div className="garden-grid" style={{ marginBottom: "0.9rem" }}>
           <article className="media-card">

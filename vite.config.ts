@@ -1,7 +1,11 @@
 import { defineConfig } from 'vite'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 // Injects the GitHub Pages SPA redirect-handler into the built index.html.
 // The companion 404.html encodes unrecognised paths into a query string;
