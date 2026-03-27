@@ -4,7 +4,7 @@ title: "Playing, Watching, Telling"
 status: "Completed"
 tags: ["Design Research", "Cultural Heritage", "XR", "Vernacular Artefacts"]
 excerpt: "A design research investigation on preserving Indian vernacular artefacts as lived experiences rather than static documentation — reframing heritage preservation as an experiential problem."
-heroImage: "/portfolio/media/IndiaHCI23_1.png"
+heroImage: "/portfolio/media/conference/IndiaHCI23_1.png"
 pageUrl: "/portfolio/indian-artefacts.html"
 order: 2
 updatedAt: "2026-03-27"
