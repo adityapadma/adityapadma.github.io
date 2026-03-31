@@ -45,7 +45,7 @@ function HeroGallery() {
     let startX = 0;
     let scrollLeft = 0;
     let animId: number;
-    const speed = 0.4;
+    const speed = 0.15;
 
     const autoScroll = () => {
       if (!isDown) {
