@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Spec — Aditya Padmagirwar PDF Portfolio 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── Token Definitions ─── */
+    :root {
+      --c-terracotta:   #C05621;
+      --c-dark:         #4A2311;
+      --c-sand:         #F7F4F0;
+      --c-white:        #FFFFFF;
+      --c-charcoal:     #1A1A1A;
+      --c-mid:          #64615D;
+      --c-cyan:         #0891B2;
+      --c-amber:        #C59B27;
+      --c-border:       #E8E3DC;
+      --c-card:         #FBF9F6;
+
+      --sp-xs:  4px;
+      --sp-s:   8px;
+      --sp-m:  16px;
+      --sp-l:  24px;
+      --sp-xl: 40px;
+      --sp-2xl:64px;
+
+      --radius-s: 4px;
+      --radius-m: 8px;
+      --radius-l: 12px;
+      --radius-pill: 999px;
+    }
+
+    /* ─── Page Shell ─── */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F0EDE8;
+      color: var(--c-charcoal);
+      line-height: 1.6;
+    }
+
+    /* ─── Top Bar ─── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26,26,26,0.96);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .topbar-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .topbar-sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .topbar-nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .topbar-nav a {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .topbar-nav a:hover { color: #fff; }
+
+    /* ─── Main Layout ─── */
+    .main { max-width: 1120px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* ─── Section Wrapper ─── */
+    .spec-section {
+      background: var(--c-white);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--c-border);
+    }
+    .spec-section + .spec-section { }
+
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-terracotta);
+      margin-bottom: 4px;
+    }
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--c-dark);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    /* ─── Color Tokens ─── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .color-swatch {
+      border-radius: var(--radius-m);
+      overflow: hidden;
+      border: 1px solid var(--c-border);
+    }
+    .swatch-block {
+      height: 72px;
+    }
+    .swatch-info {
+      padding: 10px 12px;
+      background: var(--c-card);
+    }
+    .swatch-token {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: 2px;
+    }
+    .swatch-hex {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--c-charcoal);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .swatch-usage {
+      font-size: 10px;
+      color: var(--c-mid);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ─── Type Scale ─── */
+    .type-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta {
+      font-size: 10px;
+      line-height: 1.7;
+      color: var(--c-mid);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .type-meta strong {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--c-charcoal);
+      display: block;
+      margin-bottom: 2px;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0;
+    }
+
+    /* ─── Spacing Scale ─── */
+    .spacing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .spacing-bar-wrap { flex: 1; }
+    .spacing-bar {
+      height: 20px;
+      background: var(--c-terracotta);
+      opacity: 0.15;
+      border-radius: 3px;
+      border: 1px solid var(--c-terracotta);
+    }
+    .spacing-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--c-charcoal);
+      width: 60px;
+      font-family: 'SF Mono', monospace;
+    }
+    .spacing-use {
+      font-size: 10px;
+      color: var(--c-mid);
+      width: 220px;
+    }
+
+    /* ─── Components ─── */
+    .component-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .component-card {
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-m);
+      overflow: hidden;
+    }
+    .component-preview {
+      background: var(--c-sand);
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      min-height: 100px;
+    }
+    .component-label-bar {
+      background: var(--c-card);
+      border-top: 1px solid var(--c-border);
+      padding: 8px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .comp-name {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-charcoal);
+    }
+    .comp-usage {
+      font-size: 10px;
+      color: var(--c-mid);
+    }
+
+    /* ── Component: Pill / Section Label */
+    .pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+      line-height: 1;
+    }
+    .pill-terracotta { background: var(--c-terracotta); color: #fff; }
+    .pill-amber      { background: transparent; border: 1.5px solid var(--c-amber); color: var(--c-amber); }
+    .pill-gray       { background: transparent; border: 1.5px solid #aaa; color: #888; }
+    .pill-cyan       { background: var(--c-cyan); color: #fff; }
+    .pill-amber-fill { background: var(--c-amber); color: #fff; }
+
+    /* ── Component: Pull Quote */
+    .pull-quote {
+      border-left: 3px solid var(--c-terracotta);
+      padding: 12px 16px;
+      background: var(--c-white);
+      border-radius: 0 var(--radius-m) var(--radius-m) 0;
+    }
+    .pull-quote p {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--c-charcoal);
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+    .pull-quote cite {
+      font-size: 9px;
+      color: var(--c-mid);
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Component: Stat Block */
+    .stat-block {
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Lora', serif;
+      font-size: 42px;
+      font-weight: 600;
+      color: var(--c-terracotta);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      color: var(--c-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* ── Component: Metadata Bar */
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      padding: 10px 14px;
+      background: rgba(0,0,0,0.55);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .meta-item {
+      font-family: 'Inter', sans-serif;
+      font-size: 8px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .meta-item strong { color: rgba(255,255,255,0.95); font-weight: 700; }
+
+    /* ── Component: Timeline Item */
+    .timeline-item {
+      display: flex;
+      gap: 14px;
+      position: relative;
+    }
+    .timeline-line-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: 20px;
+      flex-shrink: 0;
+    }
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--c-terracotta);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .timeline-vert {
+      width: 1px;
+      flex: 1;
+      background: var(--c-border);
+      margin-top: 4px;
+    }
+    .timeline-content { flex: 1; padding-bottom: 20px; }
+    .tl-role {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--c-charcoal);
+      line-height: 1.3;
+    }
+    .tl-org {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--c-terracotta);
+      margin-top: 1px;
+    }
+    .tl-period {
+      font-size: 9px;
+      color: var(--c-mid);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .tl-bullet {
+      font-size: 9px;
+      color: var(--c-charcoal);
+      margin-top: 6px;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+
+    /* ── Component: Pipeline Step */
+    .pipeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+    }
+    .pipe-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .pipe-step + .pipe-step::before {
+      content: '';
+      position: absolute;
+      left: -50%;
+      top: 16px;
+      width: 100%;
+      height: 1px;
+      background: var(--c-cyan);
+      opacity: 0.4;
+      z-index: 0;
+    }
+    .pipe-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--c-cyan);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+    .pipe-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-cyan);
+      margin-top: 8px;
+      text-align: center;
+    }
+    .pipe-desc {
+      font-size: 8px;
+      color: var(--c-mid);
+      text-align: center;
+      margin-top: 4px;
+      line-height: 1.5;
+      padding: 0 4px;
+    }
+
+    /* ── Component: Project Card (Index) */
+    .proj-card {
+      border-radius: var(--radius-l);
+      overflow: hidden;
+      border: 1px solid var(--c-border);
+      background: var(--c-charcoal);
+      position: relative;
+    }
+    .proj-card-img {
+      height: 100px;
+      background: linear-gradient(135deg, #2d1a0e 0%, #5c2f0e 50%, #c05621 100%);
+      display: flex;
+      align-items: flex-end;
+    }
+    .proj-card-overlay {
+      width: 100%;
+      padding: 10px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    }
+    .proj-card-num {
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+    }
+    .proj-card-title {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      color: #fff;
+      font-weight: 500;
+    }
+    .proj-card-meta {
+      padding: 8px 12px;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .proj-card-tag {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-terracotta);
+    }
+
+    /* ─── Frame / Page Spec ─── */
+    .frame-spec {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .frame-visual {
+      aspect-ratio: 210 / 297;
+      background: #fff;
+      border: 2px solid var(--c-border);
+      border-radius: 6px;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+    .frame-margin-inner {
+      position: absolute;
+      top: 12%;
+      left: 12%;
+      right: 12%;
+      bottom: 12%;
+      border: 1px dashed rgba(192,86,33,0.3);
+      border-radius: 2px;
+    }
+    .frame-grid-lines {
+      position: absolute;
+      top: 12%;
+      left: 12%;
+      right: 12%;
+      bottom: 12%;
+      display: flex;
+      gap: 4%;
+    }
+    .frame-col {
+      flex: 1;
+      background: rgba(192,86,33,0.04);
+      border-left: 1px dashed rgba(192,86,33,0.15);
+      border-right: 1px dashed rgba(192,86,33,0.15);
+      height: 100%;
+    }
+    .frame-label-tl {
+      position: absolute;
+      top: 4%;
+      left: 4%;
+      font-size: 7px;
+      font-weight: 600;
+      color: var(--c-mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .frame-label-br {
+      position: absolute;
+      bottom: 4%;
+      right: 4%;
+      font-size: 6px;
+      color: var(--c-mid);
+    }
+
+    .frame-spec-table { width: 100%; }
+    .frame-spec-table tr + tr td { padding-top: 8px; }
+    .frame-spec-table td { font-size: 12px; vertical-align: top; }
+    .frame-spec-table td:first-child {
+      font-weight: 700;
+      color: var(--c-charcoal);
+      width: 160px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding-right: 1rem;
+    }
+    .frame-spec-table td:last-child {
+      color: var(--c-mid);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px;
+    }
+    .frame-spec-table td span {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: #aaa;
+      display: block;
+    }
+
+    /* ─── Page Map ─── */
+    .page-map {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+    .pm-page {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pm-thumb {
+      aspect-ratio: 210/297;
+      border-radius: 4px;
+      border: 1px solid var(--c-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      font-size: 7px;
+      text-align: center;
+      line-height: 1.4;
+      font-weight: 600;
+      transition: border-color 0.15s;
+      cursor: default;
+    }
+    .pm-thumb:hover { border-color: var(--c-terracotta); }
+    .pm-num {
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--c-mid);
+      text-align: center;
+    }
+    .pm-name {
+      font-size: 8px;
+      color: var(--c-mid);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* ─── Color labels ─────────────────────────── */
+    .bg-terracotta  { background: var(--c-terracotta); }
+    .bg-dark        { background: var(--c-dark); }
+    .bg-sand        { background: var(--c-sand); border: 1px solid var(--c-border); }
+    .bg-white       { background: var(--c-white); border: 1px solid var(--c-border); }
+    .bg-charcoal    { background: var(--c-charcoal); }
+    .bg-mid         { background: var(--c-mid); }
+    .bg-cyan        { background: var(--c-cyan); }
+    .bg-amber       { background: var(--c-amber); }
+    .bg-border      { background: var(--c-border); }
+    .bg-card        { background: var(--c-card); border: 1px solid var(--c-border); }
+
+    /* ─── Divider ─── */
+    .spec-divider {
+      height: 1px;
+      background: var(--c-border);
+      margin: 2rem 0;
+    }
+
+    /* ─── Page color groups ─── */
+    .pm-front { background: #FBF9F6; color: var(--c-charcoal); border-color: var(--c-border); }
+    .pm-k { background: #FEF3EC; color: #7a3010; border-color: #f0c4a0; }
+    .pm-p { background: #1A1A1A; color: #f5f0eb; border-color: #444; }
+    .pm-v { background: #F7F4F0; color: var(--c-dark); border-color: var(--c-border); }
+    .pm-x { background: #EFF8FB; color: #065678; border-color: #a8dded; }
+    .pm-close { background: var(--c-white); color: var(--c-charcoal); border-color: var(--c-border); }
+
+    /* ─── Helpers ─── */
+    .flex { display: flex; }
+    .gap-s { gap: 8px; }
+    .gap-m { gap: 16px; }
+    .gap-l { gap: 24px; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .w-full { width: 100%; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOP BAR
+═══════════════════════════════════════════════════════ -->
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Aditya Padmagirwar — PDF Portfolio 2025</div>
+    <div class="topbar-sub">Figma Design Spec · Keep open alongside your design file</div>
+  </div>
+  <nav class="topbar-nav">
+    <a href="#colors">Colors</a>
+    <a href="#type">Type</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#components">Components</a>
+    <a href="#frames">Frames</a>
+    <a href="#pagemap">18-Page Map</a>
+  </nav>
+</div>
+
+<div class="main">
+
+  <!-- ═══════════════════════════════════════════════════
+       1. COLOR TOKENS
+  ═══════════════════════════════════════════════════ -->
+  <div class="spec-section" id="colors">
+    <div class="section-eyebrow">01 — Color System</div>
+    <div class="section-title">Tokens — create each as a Figma Color Style</div>
+
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block bg-terracotta"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">primary-warm</div>
+          <div class="swatch-hex">#C05621</div>
+          <div class="swatch-usage">Section labels, headings, pill fills, border accents, pull-quote bars, bullet dots</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-dark"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">primary-dark</div>
+          <div class="swatch-hex">#4A2311</div>
+          <div class="swatch-usage">Section headlines in Lora, strongest headings, dark text on warm background</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-sand"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">neutral-sand</div>
+          <div class="swatch-hex">#F7F4F0</div>
+          <div class="swatch-usage">Default page background — use on all non-title-spread pages</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-white"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">neutral-white</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-usage">Card backgrounds, callout boxes, pull quotes, component surfaces</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-charcoal"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">neutral-charcoal</div>
+          <div class="swatch-hex">#1A1A1A</div>
+          <div class="swatch-usage">All body text, primary text color throughout</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-mid"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">neutral-mid</div>
+          <div class="swatch-hex">#64615D</div>
+          <div class="swatch-usage">Sub-labels, captions, metadata, secondary descriptors</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-amber"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">accent-amber</div>
+          <div class="swatch-hex">#C59B27</div>
+          <div class="swatch-usage">Awards/publications badge, "In Development" status pill outline, timeline accents</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-cyan"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">accent-cyan</div>
+          <div class="swatch-hex">#0891B2</div>
+          <div class="swatch-usage">XR Sandbox section only — pipeline circles, section labels, link accents on pages 15–17</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-border"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">neutral-border</div>
+          <div class="swatch-hex">#E8E3DC</div>
+          <div class="swatch-usage">All dividers, image outlines, card borders, ruled lines</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block bg-card"></div>
+        <div class="swatch-info">
+          <div class="swatch-token">neutral-card</div>
+          <div class="swatch-hex">#FBF9F6</div>
+          <div class="swatch-usage">Hover state of cards, slightly warmer surface than white — use for quote boxes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-divider"></div>
+
+    <div style="font-size:11px; color: var(--c-mid); line-height:1.7;">
+      <strong style="color:var(--c-charcoal); display:block; margin-bottom:4px;">Usage Rules</strong>
+      → Each page should be <strong>~80% neutral</strong> (sand + white + charcoal) and <strong>~20% accent</strong> (terracotta).<br>
+      → XR Sandbox pages (15–17) are the only pages where <code>accent-cyan</code> appears.<br>
+      → Never use <code>primary-warm</code> as a large fill — reserve it for small elements: labels, dots, bars, borders.<br>
+      → Title spreads use full-bleed dark photography as the "color" — body pages use sand background.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       2. TYPE SCALE
+  ═══════════════════════════════════════════════════ -->
+  <div class="spec-section" id="type">
+    <div class="section-eyebrow">02 — Typography</div>
+    <div class="section-title">Type Scale — create each as a Figma Text Style</div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>cover-name</strong>
+        Manrope 800 · 52pt<br>
+        Color: neutral-charcoal<br>
+        Use: Cover page only
+      </div>
+      <div style="font-family:'Manrope',sans-serif; font-weight:800; font-size:52px; color:var(--c-charcoal); line-height:1.0;">
+        Aditya
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>hero-title</strong>
+        Lora 500 · 40–44pt<br>
+        Color: white (on image) / primary-dark<br>
+        Use: Project title spreads
+      </div>
+      <div style="font-family:'Lora',serif; font-weight:500; font-size:42px; color:var(--c-dark); line-height:1.1;">
+        KaavadBits
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>section-heading</strong>
+        Lora 500 · 22–24pt<br>
+        Color: primary-dark<br>
+        Use: Content page section headings
+      </div>
+      <div style="font-family:'Lora',serif; font-weight:500; font-size:23px; color:var(--c-dark); line-height:1.25;">
+        A tree that tells stories.
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>subheading</strong>
+        Inter 600 · 13–14pt<br>
+        Color: neutral-charcoal<br>
+        Use: Card titles, component headers
+      </div>
+      <div style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--c-charcoal); line-height:1.4;">
+        Installation Components
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>body</strong>
+        Inter 400 · 10pt<br>
+        Color: neutral-charcoal<br>
+        Line-height: 1.6<br>
+        Use: All body paragraphs
+      </div>
+      <div style="font-family:'Inter',sans-serif; font-weight:400; font-size:10px; color:var(--c-charcoal); line-height:1.6; max-width:500px;">
+        KaavadBits is a tabletop storytelling installation that embodies the narrator-patron perspective of <em>kaavad baachana</em>, a Rajasthani storytelling tradition dating back roughly 400 years. Users progressively unlock, activate, and shape key narrative moments through physical interaction.
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>pull-quote</strong>
+        Lora italic 400 · 13pt<br>
+        Color: neutral-charcoal<br>
+        Use: 1 per project, bordered left
+      </div>
+      <div style="font-family:'Lora',serif; font-weight:400; font-style:italic; font-size:13px; color:var(--c-charcoal); line-height:1.6; max-width:440px;">
+        "Story is perhaps the oldest form of communication known to humankind — it has a way of mesmerising the listeners into silence."
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>stat-number</strong>
+        Lora 600 · 40–44pt<br>
+        Color: primary-warm<br>
+        Use: Key metrics only
+      </div>
+      <div style="font-family:'Lora',serif; font-weight:600; font-size:42px; color:var(--c-terracotta); line-height:1;">
+        78.75
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>caption</strong>
+        Inter 500 · 8pt<br>
+        Color: neutral-mid<br>
+        Letter-spacing: 0.05em<br>
+        Use: Image captions, figure labels
+      </div>
+      <div style="font-family:'Inter',sans-serif; font-weight:500; font-size:8px; color:var(--c-mid); letter-spacing:0.05em; line-height:1.5;">
+        Poster Setup at ACM TEI '24. KaavadBits was presented as an interactive demo alongside the research paper.
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>section-label</strong>
+        Inter 700 · 7–8pt<br>
+        Color: white (in pill)<br>
+        Letter-spacing: 0.14em<br>
+        ALL CAPS<br>
+        Use: Section identifiers
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <span class="pill pill-terracotta">Problem / Objective</span>
+        <span class="pill pill-terracotta">Design Process</span>
+        <span class="pill pill-amber">In Development</span>
+        <span class="pill pill-gray">Proposed</span>
+        <span class="pill pill-cyan">Technical Pipeline</span>
+        <span class="pill pill-amber-fill">Publications & Awards</span>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>metadata</strong>
+        Inter 500 · 8pt<br>
+        Color: rgba(white, 0.7)<br>
+        Uppercase, tracked<br>
+        Use: Title spread bottom bar
+      </div>
+      <div style="background:rgba(0,0,0,0.7); padding:8px 14px; border-radius:4px; display:flex; gap:20px; flex-wrap:wrap;">
+        <span style="font-family:'Inter',sans-serif; font-size:8px; font-weight:500; color:rgba(255,255,255,0.65); letter-spacing:0.1em; text-transform:uppercase;"><strong style="color:rgba(255,255,255,0.9);">Year:</strong> 2023</span>
+        <span style="font-family:'Inter',sans-serif; font-size:8px; font-weight:500; color:rgba(255,255,255,0.65); letter-spacing:0.1em; text-transform:uppercase;"><strong style="color:rgba(255,255,255,0.9);">Venue:</strong> ACM TEI '24</span>
+        <span style="font-family:'Inter',sans-serif; font-size:8px; font-weight:500; color:rgba(255,255,255,0.65); letter-spacing:0.1em; text-transform:uppercase;"><strong style="color:rgba(255,255,255,0.9);">Role:</strong> Researcher</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       3. SPACING SCALE
+  ═══════════════════════════════════════════════════ -->
+  <div class="spec-section" id="spacing">
+    <div class="section-eyebrow">03 — Spacing</div>
+    <div class="section-title">Spacing Scale — use these values consistently in Figma auto-layout</div>
+
+    <div class="spacing-grid">
+      <div class="spacing-row">
+        <div class="spacing-label">4px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px; min-width:4px;"></div></div>
+        <div class="spacing-use">Token spacing — between pill text and border</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">8px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8%"></div></div>
+        <div class="spacing-use">Gap between pills/tags in a row</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">16px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16%"></div></div>
+        <div class="spacing-use">Padding inside cards, gap between small components</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">24px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24%"></div></div>
+        <div class="spacing-use">Gap between text blocks, section label → headline gap</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">36–40px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:38%"></div></div>
+        <div class="spacing-use">Page margins (all sides, mandatory for print)</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">48px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48%"></div></div>
+        <div class="spacing-use">Gap between major sections within a page</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">64–80px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:70%"></div></div>
+        <div class="spacing-use">Gap between the section label pill and the top margin</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       4. COMPONENTS
+  ═══════════════════════════════════════════════════ -->
+  <div class="spec-section" id="components">
+    <div class="section-eyebrow">04 — Reusable Components</div>
+    <div class="section-title">Build each as a Figma component — then instance across all 18 pages</div>
+
+    <div class="component-grid">
+
+      <!-- Pull Quote -->
+      <div class="component-card">
+        <div class="component-preview">
+          <div class="pull-quote" style="width:100%">
+            <p>"Story is perhaps the oldest form of communication known to humankind — it has a way of mesmerising the listeners into silence."</p>
+            <cite>— Nina Sabnani</cite>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span class="comp-name">Pull Quote</span>
+          <span class="comp-usage">1 per project · Lora italic 13pt · left border 3px terracotta</span>
+        </div>
+      </div>
+
+      <!-- Stat Block -->
+      <div class="component-card">
+        <div class="component-preview" style="justify-content:center; gap:32px;">
+          <div class="stat-block">
+            <span class="stat-number">78.75</span>
+            <div class="stat-label">System Usability<br>Scale Score</div>
+          </div>
+          <div class="stat-block">
+            <span class="stat-number">75%</span>
+            <div class="stat-label">Had no prior<br>knowledge of Kaavad</div>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span class="comp-name">Stat Block</span>
+          <span class="comp-usage">3-column grid on Outcomes pages · Lora 600 40pt terracotta</span>
+        </div>
+      </div>
+
+      <!-- Metadata Bar -->
+      <div class="component-card">
+        <div class="component-preview" style="padding:0; background:#1a1a1a; align-items:stretch;">
+          <div style="width:100%; height:60px; background: linear-gradient(135deg,#2d1a0e,#c05621); flex-shrink:0;"></div>
+          <div class="meta-bar" style="width:100%;">
+            <span class="meta-item"><strong>Year:</strong> 2023</span>
+            <span class="meta-item"><strong>Venue:</strong> ACM TEI '24</span>
+            <span class="meta-item"><strong>Role:</strong> Researcher, Designer</span>
+            <span class="meta-item"><strong>Tools:</strong> Arduino · NFC · MDF</span>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span class="comp-name">Metadata Bar</span>
+          <span class="comp-usage">Bottom strip of every title spread · Inter 500 8pt · dark overlay</span>
+        </div>
+      </div>
+
+      <!-- Section Label Pill -->
+      <div class="component-card">
+        <div class="component-preview" style="flex-direction:column; gap:12px;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="pill pill-terracotta">Problem / Objective</span>
+            <span class="pill pill-terracotta">Design Process</span>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="pill pill-amber-fill">Publications & Awards</span>
+            <span class="pill pill-amber">In Development</span>
+            <span class="pill pill-gray">Proposed</span>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="pill pill-cyan">Technical Pipeline</span>
+            <span class="pill pill-cyan">Sub-Project 1 of 2</span>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span class="comp-name">Section Label Pills</span>
+          <span class="comp-usage">Top of every content block · Inter 700 7pt · 4px 12px padding</span>
+        </div>
+      </div>
+
+      <!-- Timeline Item -->
+      <div class="component-card">
+        <div class="component-preview" style="flex-direction:column; background: white;">
+          <div class="timeline-item">
+            <div class="timeline-line-wrap">
+              <div class="timeline-dot"></div>
+              <div class="timeline-vert"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="tl-role">Undergraduate Researcher</div>
+              <div class="tl-org">Creative Interfaces Lab, IIIT Delhi</div>
+              <div class="tl-period">May 2023 – Present</div>
+              <div class="tl-bullet">→ Led R&D on tangible storytelling systems using LLMs.<br>→ Designed prototypes and ran user evaluations in XR.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line-wrap">
+              <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="tl-role">Research Intern</div>
+              <div class="tl-org">IMXD Lab, IIT Bombay</div>
+              <div class="tl-period">May – July 2024</div>
+            </div>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span class="comp-name">Timeline Item</span>
+          <span class="comp-usage">Page 3 (Skills) · dot + vertical line + content block</span>
+        </div>
+      </div>
+
+      <!-- Pipeline Step -->
+      <div class="component-card">
+        <div class="component-preview" style="padding:1.5rem 1rem; align-items:flex-start;">
+          <div class="pipeline" style="width:100%;">
+            <div class="pipe-step">
+              <div class="pipe-circle">1</div>
+              <div class="pipe-label">Capture</div>
+              <div class="pipe-desc">Kinect V2 Depth + IR + Color</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-circle">2</div>
+              <div class="pipe-label">Map</div>
+              <div class="pipe-desc">Python → Unity TCP/JSON</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-circle">3</div>
+              <div class="pipe-label">Generate</div>
+              <div class="pipe-desc">ComfyUI / StreamDiffusion</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-circle">4</div>
+              <div class="pipe-label">Project</div>
+              <div class="pipe-desc">1920×1080 onto sandtable</div>
+            </div>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span class="comp-name">Pipeline Step</span>
+          <span class="comp-usage">Page 17 (XR Sandbox) · cyan circles · Inter 8pt labels</span>
+        </div>
+      </div>
+
+      <!-- Project Card (Index) -->
+      <div class="component-card">
+        <div class="component-preview" style="flex-direction:column; gap:10px; background:var(--c-charcoal);">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%;">
+            <div class="proj-card">
+              <div class="proj-card-img">
+                <div class="proj-card-overlay">
+                  <div class="proj-card-num">01</div>
+                  <div class="proj-card-title">KaavadBits</div>
+                </div>
+              </div>
+              <div class="proj-card-meta">
+                <span class="proj-card-tag">Tangible · Published</span>
+              </div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-card-img" style="background:linear-gradient(135deg,#065678,#0891B2);">
+                <div class="proj-card-overlay">
+                  <div class="proj-card-num">04</div>
+                  <div class="proj-card-title">XR Sandbox</div>
+                </div>
+              </div>
+              <div class="proj-card-meta">
+                <span class="proj-card-tag">Speculative · GenAI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span class="comp-name">Project Index Card</span>
+          <span class="comp-usage">Page 4 (Index) · 2×2 grid · full-bleed image + gradient overlay</span>
+        </div>
+      </div>
+
+      <!-- Outcome Row -->
+      <div class="component-card">
+        <div class="component-preview" style="flex-direction:column; gap:0; background:white; padding:0;">
+          <div style="padding:14px 16px; border-bottom:1px solid var(--c-border);">
+            <div style="font-size:11px; font-weight:700; color:var(--c-terracotta); margin-bottom:4px;">Somatic Memory</div>
+            <div style="font-size:9px; color:var(--c-mid); line-height:1.6;">Physical actions like bending and stacking reactivate long-dormant autobiographical memories without any narrative text or prompts.</div>
+          </div>
+          <div style="padding:14px 16px; border-bottom:1px solid var(--c-border);">
+            <div style="font-size:11px; font-weight:700; color:var(--c-terracotta); margin-bottom:4px;">Intrinsic Reward</div>
+            <div style="font-size:9px; color:var(--c-mid); line-height:1.6;">No scores. No points. The emotional payoff of the final throw is the only reward.</div>
+          </div>
+          <div style="padding:14px 16px;">
+            <div style="font-size:11px; font-weight:700; color:var(--c-terracotta); margin-bottom:4px;">Spatial Art</div>
+            <div style="font-size:9px; color:var(--c-mid); line-height:1.6;">Moves from literal game simulation toward a spatial art installation grounded in the gesture of play.</div>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span class="comp-name">Outcome Row</span>
+          <span class="comp-usage">Outcomes pages · colored label + body text + horizontal rule</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       5. FRAME / PAGE SPEC
+  ═══════════════════════════════════════════════════ -->
+  <div class="spec-section" id="frames">
+    <div class="section-eyebrow">05 — Page Frames & Grid</div>
+    <div class="section-title">Set up one master frame in Figma — duplicate for all 18 pages</div>
+
+    <div class="frame-spec">
+      <!-- Visual -->
+      <div>
+        <div class="frame-visual">
+          <div class="frame-label-tl">A4 Frame<br>794 × 1123 px</div>
+          <div class="frame-margin-inner">
+            <div class="frame-grid-lines">
+              <div class="frame-col"></div>
+              <div class="frame-col"></div>
+              <div class="frame-col"></div>
+              <div class="frame-col"></div>
+            </div>
+          </div>
+          <div class="frame-label-br">36px margins</div>
+        </div>
+        <div style="font-size:9px; color:var(--c-mid); margin-top:8px; text-align:center; line-height:1.6;">
+          Dashed orange = safe text zone<br>
+          Faint columns = 4-column grid (of 12)
+        </div>
+      </div>
+
+      <!-- Spec Table -->
+      <div>
+        <table class="frame-spec-table">
+          <tr>
+            <td>Frame Size</td>
+            <td>794 × 1123 px <span>(A4 Portrait @ 72 dpi)</span></td>
+          </tr>
+          <tr>
+            <td>Export Scale</td>
+            <td>2× → 1588 × 2246 px <span>(Figma: Export → PDF, 2x)</span></td>
+          </tr>
+          <tr>
+            <td>Margins</td>
+            <td>36 px all sides <span>(~12.7mm — safe print zone)</span></td>
+          </tr>
+          <tr>
+            <td>Column Grid</td>
+            <td>12 columns, 16 px gutter <span>(Figma: Add Grid → Columns)</span></td>
+          </tr>
+          <tr>
+            <td>Row Grid</td>
+            <td>8 px baseline grid <span>(Figma: Add Grid → Rows, 8px)</span></td>
+          </tr>
+          <tr>
+            <td>Target Pages</td>
+            <td>18 pages total <span>(duplicate frame, not new file)</span></td>
+          </tr>
+          <tr>
+            <td>Font Sizes</td>
+            <td>Minimum 8 pt in file <span>(= 9pt equivalent at 2x export)</span></td>
+          </tr>
+          <tr>
+            <td>Image Min</td>
+            <td>1500 px on short side <span>(check before placing in file)</span></td>
+          </tr>
+          <tr>
+            <td>Color Mode</td>
+            <td>RGB (sRGB) <span>(convert to CMYK in Acrobat if printing)</span></td>
+          </tr>
+          <tr>
+            <td>File Size</td>
+            <td>Target &lt; 10 MB (screen) <span>(Compress via Smallpdf after export)</span></td>
+          </tr>
+          <tr>
+            <td>Filename</td>
+            <td>Aditya_Padmagirwar_Portfolio_2025.pdf <span></span></td>
+          </tr>
+        </table>
+
+        <div class="spec-divider" style="margin:1.5rem 0;"></div>
+
+        <div style="font-size:11px; color:var(--c-charcoal); font-weight:700; margin-bottom:8px;">Figma Setup Steps</div>
+        <ol style="font-size:11px; color:var(--c-mid); line-height:2.0; padding-left:1.2rem;">
+          <li>File → New → Frame → A4 (794 × 1123)</li>
+          <li>Design panel → Add Grid → Columns: 12, Gutter: 16, Margin: 36</li>
+          <li>Add Grid → Rows: 8px</li>
+          <li>Duplicate frame 17× → rename: "01 Cover", "02 About", etc.</li>
+          <li>Create Color Styles from the 10 tokens above</li>
+          <li>Create Text Styles from the 9 type roles above</li>
+          <li>Build the 8 components above → publish to file library</li>
+          <li>Start designing Page 1 → instance components as needed</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       6. 18-PAGE MAP
+  ═══════════════════════════════════════════════════ -->
+  <div class="spec-section" id="pagemap">
+    <div class="section-eyebrow">06 — 18-Page Structure Map</div>
+    <div class="section-title">One thumbnail per page — color coded by section</div>
+
+    <div style="display:flex; gap:16px; margin-bottom:12px; flex-wrap:wrap; font-size:10px; color:var(--c-mid);">
+      <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#FBF9F6;border:1px solid var(--c-border);border-radius:2px;"></span> Front Matter</span>
+      <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#FEF3EC;border:1px solid #f0c4a0;border-radius:2px;"></span> KaavadBits</span>
+      <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#1A1A1A;border:1px solid #444;border-radius:2px;"></span> P/W/T</span>
+      <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#F7F4F0;border:1px solid var(--c-border);border-radius:2px;"></span> VR Lagori</span>
+      <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#EFF8FB;border:1px solid #a8dded;border-radius:2px;"></span> XR Sandbox</span>
+      <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#fff;border:1px solid var(--c-border);border-radius:2px;"></span> Closing</span>
+    </div>
+
+    <div class="page-map">
+      <div class="pm-page"><div class="pm-thumb pm-front">Cover<br>Photo full-bleed<br>Name + Tagline</div><div class="pm-num">01</div><div class="pm-name">Cover</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-front">Portrait photo<br>+<br>Bio + Tags</div><div class="pm-num">02</div><div class="pm-name">About</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-front">Timeline<br>+<br>Skills grid</div><div class="pm-num">03</div><div class="pm-name">Skills</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-front">2×2<br>Project<br>Index Grid</div><div class="pm-num">04</div><div class="pm-name">Index</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-k">Full-bleed<br>Hero<br>KaavadBits</div><div class="pm-num">05</div><div class="pm-name">KB · Title</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-k">Problem<br>+<br>Process</div><div class="pm-num">06</div><div class="pm-name">KB · Problem</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-k">Installation<br>+<br>Interaction</div><div class="pm-num">07</div><div class="pm-name">KB · System</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-k">Stats<br>+<br>Awards</div><div class="pm-num">08</div><div class="pm-name">KB · Outcomes</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-p">Full-bleed<br>Title<br>P/W/T</div><div class="pm-num">09</div><div class="pm-name">P/W/T · Title</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-p">Problem<br>+<br>3 Principles</div><div class="pm-num">10</div><div class="pm-name">P/W/T · Problem</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-p">3 Projects<br>in Brief<br>+ Closing line</div><div class="pm-num">11</div><div class="pm-name">P/W/T · Work</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-v">Full-bleed<br>Hero<br>VR Lagori</div><div class="pm-num">12</div><div class="pm-name">VRL · Title</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-v">Goal<br>Why XR<br>Interaction</div><div class="pm-num">13</div><div class="pm-name">VRL · Design</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-v">5-Beat arc<br>Outcomes<br>Screenshots</div><div class="pm-num">14</div><div class="pm-name">VRL · Outcomes</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-x">Full-bleed<br>Hero<br>XR Sandbox</div><div class="pm-num">15</div><div class="pm-name">XRS · Title</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-x">ARTS<br>+<br>Sculpting AI</div><div class="pm-num">16</div><div class="pm-name">XRS · Projects</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-x">Pipeline<br>Diagram<br>Future Work</div><div class="pm-num">17</div><div class="pm-name">XRS · Pipeline</div></div>
+      <div class="pm-page"><div class="pm-thumb pm-close">Contact<br>+<br>QR Code</div><div class="pm-num">18</div><div class="pm-name">Closing</div></div>
+    </div>
+
+    <div class="spec-divider"></div>
+
+    <div style="font-size:10px; color:var(--c-mid); line-height:1.8;">
+      <strong style="color:var(--c-charcoal);">Title Spread pages (05, 09, 12, 15):</strong> No margins. Full-bleed photo. All text overlaid. Background = the project image.<br>
+      <strong style="color:var(--c-charcoal);">Content pages (all others):</strong> Background = neutral-sand (#F7F4F0). 36px margins enforced. Grid visible in Figma for alignment.<br>
+      <strong style="color:var(--c-charcoal);">P/W/T pages (09–11):</strong> Darker background (#1A1A1A) reflects the website's dark philosophy section — optional but creates strong visual contrast between project sections.
+    </div>
+  </div>
+
+</div><!-- /main -->
+</body>
+</html>

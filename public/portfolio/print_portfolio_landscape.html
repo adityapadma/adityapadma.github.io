@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aditya Padmagirwar - Portfolio PDF (Landscape)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-terracotta: #C05621;
+    --c-dark: #4A2311;
+    --c-sand: #F7F4F0;
+    --c-white: #FFFFFF;
+    --c-charcoal: #1A1A1A;
+    --c-mid: #64615D;
+    --c-amber: #C59B27;
+    --c-cyan: #0891B2;
+    --c-border: #E8E3DC;
+    --c-card: #FBF9F6;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #ccc;
+    font-family: 'Inter', sans-serif;
+    color: var(--c-charcoal);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 297mm;
+    height: 210mm;
+    background: var(--c-sand);
+    margin: 10mm auto;
+    position: relative;
+    box-sizing: border-box;
+    page-break-after: always;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  @media print {
+    body { background: white; margin: 0; }
+    .page { margin: 0; box-shadow: none; border-radius: 0; }
+    @page { size: A4 landscape; margin: 0; }
+  }
+  .p-margin { padding: 12mm 16mm; height: 100%; box-sizing: border-box; position: relative;}
+  h1, h2, h3, h4, h5, p { margin: 0; }
+  
+  .pill {
+    display: inline-block;
+    padding: 2.5mm 4mm;
+    border-radius: 999px;
+    font-size: 7.5pt;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .pill-terracotta { background: var(--c-terracotta); color: #fff; }
+  .pill-amber { border: 1px solid var(--c-amber); color: var(--c-amber); }
+  .pill-amber-fill { background: var(--c-amber); color: #fff; }
+  .pill-gray { border: 1px solid #aaa; color: #888; }
+  .pill-cyan { background: var(--c-cyan); color: #fff; }
+  
+  .img-cover { object-fit: cover; width: 100%; height: 100%; }
+  .img-contain { object-fit: contain; width: 100%; height: 100%; }
+  .pos-abs { position: absolute; }
+  .inset-0 { top:0; left:0; right:0; bottom:0; }
+  
+  .ts-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+  }
+  
+  /* Typography classes */
+  .font-lora { font-family: 'Lora', serif; }
+  .font-inter { font-family: 'Inter', sans-serif; }
+  .font-manrope { font-family: 'Manrope', sans-serif; }
+  
+  .c-white { color: white; }
+  .c-primary-dark { color: var(--c-dark); }
+  .c-primary-warm { color: var(--c-terracotta); }
+  .c-charcoal { color: var(--c-charcoal); }
+  .c-mid { color: var(--c-mid); }
+  .c-amber { color: var(--c-amber); }
+  .c-cyan { color: var(--c-cyan); }
+  
+  .ts-meta-bar {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    background: rgba(0,0,0,0.7); padding: 4mm 16mm; box-sizing: border-box;
+    display: flex; gap: 8mm; flex-wrap: wrap; color: rgba(255,255,255,0.75);
+    font-size: 8pt; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .ts-meta-bar strong { color: white; }
+  
+  .section-headline { font-family: 'Lora', serif; font-size: 20pt; color: var(--c-dark); font-weight: 500; line-height: 1.25; margin-top: 3mm; margin-bottom: 4mm; }
+  .body-text { font-family: 'Inter', sans-serif; font-size: 9.5pt; color: var(--c-charcoal); line-height: 1.6; margin-bottom: 3mm; }
+  
+  .pull-quote {
+    border-left: 3px solid var(--c-terracotta);
+    padding: 4mm 6mm;
+    background: var(--c-white);
+    border-radius: 0 4mm 4mm 0;
+    margin: 4mm 0;
+  }
+  .pull-quote p { font-family: 'Lora', serif; font-size: 12pt; font-style: italic; color: var(--c-charcoal); line-height: 1.6; margin-bottom: 2mm;}
+  .pull-quote cite { font-size: 8pt; color: var(--c-mid); font-style: normal; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; height:100%; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6mm; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+  .flex-col { display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+
+<!-- P1 Cover -->
+<div class="page">
+  <div class="pos-abs inset-0"><img src="media/conference/IndiaHCI23_1.png" class="img-cover"></div>
+  <div class="pos-abs inset-0 ts-overlay" style="background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%);"></div>
+  <div class="p-margin" style="display:flex; flex-direction:column; justify-content:center; position:relative; z-index:10;">
+    <div>
+      <div class="font-inter c-white" style="font-size:10pt; text-transform:uppercase; letter-spacing:0.15em; font-weight:500; margin-bottom: 4mm; color: #ffb590;">
+        HCI Researcher · Interaction Designer · IIIT Delhi
+      </div>
+      <div class="font-manrope c-white" style="font-size: 64pt; font-weight: 800; line-height: 1; margin-bottom: 4mm;">
+        Aditya<br>Padmagirwar
+      </div>
+      <div class="font-lora c-white" style="font-size: 18pt; font-style: italic; opacity: 0.85;">
+        Designing where culture, the body, and technology meet.
+      </div>
+    </div>
+    <div class="font-inter c-white" style="position:absolute; bottom:12mm; left:16mm; font-size:9pt; text-transform:uppercase; letter-spacing:0.15em; opacity:0.7;">
+      adityapadma.github.io · 2025
+    </div>
+  </div>
+</div>
+
+<!-- P2 About -->
+<div class="page">
+  <div class="p-margin" style="padding:0;">
+    <div style="display:grid; grid-template-columns: 1fr 1.6fr; height: 100%;">
+      <!-- Left Photo -->
+      <div style="background: var(--c-border); position: relative; height: 100%;">
+        <img src="media/me.png" class="img-cover" style="object-position: center top;">
+      </div>
+      <!-- Right Content -->
+      <div style="padding: 16mm 20mm; display:flex; flex-direction:column; justify-content:center;">
+        <div class="pill pill-terracotta" style="margin-bottom: 6mm; align-self:flex-start;">About</div>
+        <div class="font-lora c-primary-dark" style="font-size:26pt; line-height:1.2; font-weight:500; margin-bottom: 6mm;">
+          I design for how people remember, feel, and participate.
+        </div>
+        <div class="body-text">
+          I'm Aditya Padmagirwar — a Computer Science and Social Science undergraduate at IIIT Delhi, and an Undergraduate Researcher at the Creative Interfaces Lab.
+        </div>
+        <div class="body-text">
+          My work sits at the intersection of Tangible User Interfaces, Immersive Media, and South Asian cultural contexts. I build systems that don't just display heritage — they let people perform it.
+        </div>
+        <div class="body-text" style="margin-bottom: 8mm;">
+          I'm driven by a simple question: what does it feel like to interact with something that knows who you are and where you come from?
+        </div>
+        
+        <div class="font-inter c-mid" style="font-size:9pt; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; margin-bottom: 4mm;">Research Interests</div>
+        <div style="display:flex; flex-wrap:wrap; gap:3mm;">
+          <span style="border: 1px solid var(--c-border); padding: 2mm 3mm; border-radius: 4mm; font-size: 7.5pt; text-transform:uppercase; letter-spacing:0.05em; color:var(--c-charcoal); background:#fff;">Human-Computer Interaction</span>
+          <span style="border: 1px solid var(--c-border); padding: 2mm 3mm; border-radius: 4mm; font-size: 7.5pt; text-transform:uppercase; letter-spacing:0.05em; color:var(--c-charcoal); background:#fff;">Tangible User Interfaces</span>
+          <span style="border: 1px solid var(--c-border); padding: 2mm 3mm; border-radius: 4mm; font-size: 7.5pt; text-transform:uppercase; letter-spacing:0.05em; color:var(--c-charcoal); background:#fff;">Ubiquitous Computing</span>
+          <span style="border: 1px solid var(--c-border); padding: 2mm 3mm; border-radius: 4mm; font-size: 7.5pt; text-transform:uppercase; letter-spacing:0.05em; color:var(--c-charcoal); background:#fff;">Interactive Digital Narratives</span>
+          <span style="border: 1px solid var(--c-border); padding: 2mm 3mm; border-radius: 4mm; font-size: 7.5pt; text-transform:uppercase; letter-spacing:0.05em; color:var(--c-charcoal); background:#fff;">Immersive Media</span>
+          <span style="border: 1px solid var(--c-border); padding: 2mm 3mm; border-radius: 4mm; font-size: 7.5pt; text-transform:uppercase; letter-spacing:0.05em; color:var(--c-charcoal); background:#fff;">Design Futures</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P3 Skills -->
+<div class="page">
+  <div class="p-margin">
+    <div class="pill pill-terracotta" style="margin-bottom: 6mm;">Experience & Skills</div>
+    <div class="grid-2">
+      <!-- Left: Experience -->
+      <div>
+        <div style="display:flex; gap: 4mm; margin-bottom: 5mm;">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+             <div style="width:3mm; height:3mm; border-radius:50%; background:var(--c-terracotta); margin-top:1.5mm;"></div>
+             <div style="width:1px; flex:1; background:var(--c-border); margin-top:2mm;"></div>
+          </div>
+          <div style="padding-bottom: 2mm;">
+             <div class="font-inter" style="font-weight:700; font-size:11pt; color:var(--c-charcoal);">Undergraduate Researcher</div>
+             <div class="font-inter" style="font-weight:600; font-size:9pt; color:var(--c-terracotta);">Creative Interfaces Lab, IIIT Delhi</div>
+             <div class="font-inter" style="font-weight:500; font-size:8pt; color:var(--c-mid); text-transform:uppercase; letter-spacing:0.05em; margin: 1mm 0 2mm;">May 2023 – Present</div>
+             <div class="body-text" style="font-size:9pt; margin-bottom:1mm;">→ Led R&D on tangible storytelling systems using LLMs as narrative agents.</div>
+             <div class="body-text" style="font-size:9pt;">→ Designed prototypes and ran user evaluations focused on South Asian storytelling.</div>
+          </div>
+        </div>
+        <div style="display:flex; gap: 4mm; margin-bottom: 5mm;">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+             <div style="width:3mm; height:3mm; border-radius:50%; background:var(--c-terracotta); margin-top:1.5mm;"></div>
+             <div style="width:1px; flex:1; background:var(--c-border); margin-top:2mm;"></div>
+          </div>
+          <div style="padding-bottom: 2mm;">
+             <div class="font-inter" style="font-weight:700; font-size:11pt; color:var(--c-charcoal);">Research Intern</div>
+             <div class="font-inter" style="font-weight:600; font-size:9pt; color:var(--c-terracotta);">IMXD Lab, IIT Bombay</div>
+             <div class="font-inter" style="font-weight:500; font-size:8pt; color:var(--c-mid); text-transform:uppercase; letter-spacing:0.05em; margin: 1mm 0 2mm;">May – July 2024</div>
+             <div class="body-text" style="font-size:9pt; margin-bottom:1mm;">→ Built a Unity VR prototype for contemporary art translation.</div>
+             <div class="body-text" style="font-size:9pt;">→ Co-authored research on shape-changing interfaces.</div>
+          </div>
+        </div>
+        <div style="display:flex; gap: 4mm; margin-bottom: 5mm;">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+             <div style="width:3mm; height:3mm; border-radius:50%; background:var(--c-terracotta); margin-top:1.5mm;"></div>
+             <div style="width:1px; flex:1; background:var(--c-border); margin-top:2mm;"></div>
+          </div>
+          <div style="padding-bottom: 2mm;">
+             <div class="font-inter" style="font-weight:700; font-size:11pt; color:var(--c-charcoal);">UX Researcher</div>
+             <div class="font-inter" style="font-weight:600; font-size:9pt; color:var(--c-terracotta);">IWay Plus, IIT Delhi</div>
+             <div class="font-inter" style="font-weight:500; font-size:8pt; color:var(--c-mid); text-transform:uppercase; letter-spacing:0.05em; margin: 1mm 0 2mm;">September – December 2024</div>
+             <div class="body-text" style="font-size:9pt; margin-bottom:1mm;">→ Mapped patient journeys at IRCH-AIIMS; proposed LLM navigation interventions.</div>
+          </div>
+        </div>
+        <div style="display:flex; gap: 4mm;">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+             <div style="width:3mm; height:3mm; border-radius:50%; background:var(--c-mid); margin-top:1.5mm;"></div>
+          </div>
+          <div>
+             <div class="font-inter" style="font-weight:700; font-size:11pt; color:var(--c-charcoal);">B.Tech, Computer Science & Social Science</div>
+             <div class="font-inter" style="font-weight:600; font-size:9pt; color:var(--c-terracotta);">IIIT Delhi</div>
+             <div class="font-inter" style="font-weight:500; font-size:8pt; color:var(--c-mid); text-transform:uppercase; letter-spacing:0.05em; margin: 1mm 0;">2022 – 2026 (Expected)</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right: Skills (2 column layout inside) -->
+      <div style="padding-left: 8mm;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6mm;">
+          <div>
+            <div class="font-inter" style="font-weight:700; font-size:8pt; color:var(--c-mid); text-transform:uppercase; letter-spacing:0.1em; border-bottom:1px solid var(--c-border); padding-bottom:2mm; margin-bottom:3mm;">Research Methods</div>
+            <div class="font-inter" style="font-size:9.5pt; color:var(--c-charcoal); line-height: 1.8;">Design Thinking<br>User Research & Testing<br>Study Design<br>Data Analysis<br>Affinity Mapping<br>Prospect Theory</div>
+          </div>
+          <div>
+            <div class="font-inter" style="font-weight:700; font-size:8pt; color:var(--c-mid); text-transform:uppercase; letter-spacing:0.1em; border-bottom:1px solid var(--c-border); padding-bottom:2mm; margin-bottom:3mm;">Programming</div>
+            <div class="font-inter" style="font-size:9.5pt; color:var(--c-charcoal); line-height: 1.8;">Python · C#<br>R · HTML / CSS<br>P5.js · oTree<br>LaTeX</div>
+          </div>
+          <div>
+            <div class="font-inter" style="font-weight:700; font-size:8pt; color:var(--c-mid); text-transform:uppercase; letter-spacing:0.1em; border-bottom:1px solid var(--c-border); padding-bottom:2mm; margin-bottom:3mm;">Prototyping & Tools</div>
+            <div class="font-inter" style="font-size:9.5pt; color:var(--c-charcoal); line-height: 1.8;">Figma · Unity<br>Arduino IDE<br>TouchDesigner<br>Rhino + Grasshopper<br>Linux / Unix Shell</div>
+          </div>
+          <div>
+            <div class="font-inter" style="font-weight:700; font-size:8pt; color:var(--c-mid); text-transform:uppercase; letter-spacing:0.1em; border-bottom:1px solid var(--c-border); padding-bottom:2mm; margin-bottom:3mm;">Libraries & Frameworks</div>
+            <div class="font-inter" style="font-size:9.5pt; color:var(--c-charcoal); line-height: 1.8;">YOLOv8 · ARKit<br>MediaPipe · pandas<br>NumPy · Matplotlib<br>scikit-learn · Three.js<br>StreamDiffusion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P4 Index -->
+<div class="page">
+  <div class="p-margin" style="display:flex; flex-direction:column; height: 100%;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:6mm;">
+      <div>
+        <div class="pill pill-terracotta" style="margin-bottom:4mm;">Selected Work</div>
+        <div class="font-lora c-primary-dark" style="font-size: 28pt; line-height: 1.1;">Four projects.<br>One question.</div>
+      </div>
+      <div class="font-lora c-mid" style="font-size: 13pt; font-style: italic; max-width: 100mm; text-align:right;">
+        How do we preserve culture through embodied, performative interaction — not just documentation?
+      </div>
+    </div>
+    
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; flex: 1;">
+      <!-- Card 1 -->
+      <div style="position:relative; border-radius: 4mm; overflow:hidden; border: 1px solid var(--c-border); height:100%;">
+        <img src="media/KaavadBits/heroimage.png" class="img-cover pos-abs inset-0">
+        <div class="pos-abs inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 70%);"></div>
+        <div class="pos-abs inset-0" style="padding: 5mm; display:flex; flex-direction:column; justify-content:flex-end;">
+          <div style="color:var(--c-terracotta); font-weight:700; font-size:8pt; letter-spacing:0.1em;">01</div>
+          <div class="font-inter c-white" style="font-weight:700; font-size:12pt; margin-bottom:1mm;">KaavadBits</div>
+          <div class="font-inter" style="color:var(--c-terracotta); font-size:6.5pt; text-transform:uppercase; font-weight:700; letter-spacing:0.1em; margin-bottom:2mm;">Tangible · Published</div>
+          <div class="font-inter" style="color:rgba(255,255,255,0.7); font-size:8.5pt; line-height:1.4;">A 400-year-old story tradition, rebuilt as a branching tangible installation.</div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div style="position:relative; border-radius: 4mm; overflow:hidden; border: 1px solid var(--c-border); height:100%;">
+        <img src="media/playwatchtell/heroimage.png" class="img-cover pos-abs inset-0">
+        <div class="pos-abs inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 70%);"></div>
+        <div class="pos-abs inset-0" style="padding: 5mm; display:flex; flex-direction:column; justify-content:flex-end;">
+          <div style="color:var(--c-terracotta); font-weight:700; font-size:8pt; letter-spacing:0.1em;">02</div>
+          <div class="font-inter c-white" style="font-weight:700; font-size:12pt; margin-bottom:1mm;">Playing, Watching, Telling</div>
+          <div class="font-inter" style="color:var(--c-terracotta); font-size:6.5pt; text-transform:uppercase; font-weight:700; letter-spacing:0.1em; margin-bottom:2mm;">Design Research</div>
+          <div class="font-inter" style="color:rgba(255,255,255,0.7); font-size:8.5pt; line-height:1.4;">A research framework for reinterpreting Indian vernacular artefacts through digital media.</div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div style="position:relative; border-radius: 4mm; overflow:hidden; border: 1px solid var(--c-border); height:100%;">
+        <img src="media/vrlagori/heroimage.png" class="img-cover pos-abs inset-0">
+        <div class="pos-abs inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 70%);"></div>
+        <div class="pos-abs inset-0" style="padding: 5mm; display:flex; flex-direction:column; justify-content:flex-end;">
+          <div style="color:var(--c-terracotta); font-weight:700; font-size:8pt; letter-spacing:0.1em;">03</div>
+          <div class="font-inter c-white" style="font-weight:700; font-size:12pt; margin-bottom:1mm;">VR Lagori</div>
+          <div class="font-inter" style="color:var(--c-terracotta); font-size:6.5pt; text-transform:uppercase; font-weight:700; letter-spacing:0.1em; margin-bottom:2mm;">XR Prototype</div>
+          <div class="font-inter" style="color:rgba(255,255,255,0.7); font-size:8.5pt; line-height:1.4;">A poetic VR reimagining of a street game designed to activate somatic memory.</div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div style="position:relative; border-radius: 4mm; overflow:hidden; border: 1px solid var(--c-border); height:100%;">
+        <img src="media/XRSandbox/heroimage.jpg" class="img-cover pos-abs inset-0">
+        <div class="pos-abs inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 70%);"></div>
+        <div class="pos-abs inset-0" style="padding: 5mm; display:flex; flex-direction:column; justify-content:flex-end;">
+          <div style="color:var(--c-cyan); font-weight:700; font-size:8pt; letter-spacing:0.1em;">04</div>
+          <div class="font-inter c-white" style="font-weight:700; font-size:12pt; margin-bottom:1mm;">XR Sandbox</div>
+          <div class="font-inter" style="color:var(--c-cyan); font-size:6.5pt; text-transform:uppercase; font-weight:700; letter-spacing:0.1em; margin-bottom:2mm;">Speculative · GenAI</div>
+          <div class="font-inter" style="color:rgba(255,255,255,0.7); font-size:8.5pt; line-height:1.4;">Tangible sand manipulation fused with real-time GenAI pipelines for citizen participation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Title Speads generally scale nicely. Just adjust font sizes slightly for landscape breathing room -->
+<!-- P5 KaavadBits Title -->
+<div class="page">
+  <div class="pos-abs inset-0"><img src="media/KaavadBits/heroimage.png" class="img-cover" style="object-position: center 30%;"></div>
+  <div class="pos-abs inset-0 ts-overlay" style="background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);"></div>
+  <div class="p-margin" style="position:relative; z-index:10; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+    <div style="display:flex; gap:3mm; margin-bottom:6mm;">
+      <span class="pill" style="background:#fff; color:var(--c-terracotta);">Interaction Design</span>
+      <span class="pill" style="background:#fff; color:var(--c-terracotta);">Cultural Heritage</span>
+      <span class="pill" style="background:#fff; color:var(--c-terracotta);">Tangible Interfaces</span>
+    </div>
+    <div class="font-lora c-white" style="font-size: 52pt; font-weight: 500; margin-bottom: 2mm;">KaavadBits</div>
+    <div class="font-lora c-white" style="font-size: 16pt; font-style: italic; opacity: 0.8; margin-bottom: 6mm;">Reimagining a 400-Year-Old Storytelling Tradition</div>
+    <div class="font-inter c-white" style="font-size: 11pt; opacity: 0.7; max-width: 120mm; line-height: 1.6;">
+      An exploration in Tangible Interactive Storytelling presented at ACM TEI '24 — bridging ancient Rajasthani oral heritage and modern multi-sensory interfaces.
+    </div>
+  </div>
+  <div class="ts-meta-bar">
+    <span><strong>Year:</strong> 2023</span>
+    <span><strong>Venue:</strong> ACM TEI '24 + IndiaHCI '23</span>
+    <span><strong>Role:</strong> Researcher, Designer</span>
+    <span><strong>Tools:</strong> Arduino · NFC · Servo Motors · LED Matrix</span>
+  </div>
+</div>
+
+<!-- P6 KaavadBits Problem -->
+<div class="page">
+  <div class="p-margin">
+    <div class="grid-2">
+      <div style="padding-right: 6mm;">
+        <div class="pill pill-terracotta">Problem / Objective</div>
+        <div class="section-headline">The Kaavad is not an object.<br>It is a performance.</div>
+        <div class="body-text">
+          The Rajasthani Kaavad is a portable wooden shrine carried by a traveling storyteller (kaavadiya). Its hinged doors open layer by layer, guiding audiences through tales from sacred texts — but meaning lives in the narrator's voice, the patron's attention, and the ritual of unfolding. A museum case kills it.
+        </div>
+        <div class="body-text">
+          The challenge: how can interaction design preserve not the artefact, but the experience of being inside its story?
+        </div>
+        <div class="pull-quote">
+          <p>"Story is perhaps the oldest form of communication known to humankind — it has a way of mesmerising the listeners into silence and the tellers into expressing the deepest desires and anxieties of their society."</p>
+          <cite>— Nina Sabnani</cite>
+        </div>
+      </div>
+      <div>
+        <div class="pill pill-terracotta" style="margin-bottom: 4mm;">Design Process</div>
+        <div class="font-inter" style="font-weight:700; font-size:11pt; margin-bottom: 2mm;">Research through Design (RtD)</div>
+        <div class="body-text">
+          We moved through rapid cycles of sketching, cardboard prototyping, and in-person pilot testing. Early iterations included a hand-cranked bioscope model.
+        </div>
+        <div class="body-text">
+          Pilot testing revealed that bidirectional time flow was cognitively overwhelming. We pivoted to a simpler, forward-branching interaction model.
+        </div>
+        <div style="background:var(--c-white); border:1px solid var(--c-border); border-radius: 4mm; padding: 3mm; margin-top: 4mm; height:50mm;">
+          <img src="media/KaavadBits/design-process1.png" class="img-cover" style="border-radius: 2mm; object-position: center 20%;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P7 KaavadBits System -->
+<div class="page">
+  <div class="p-margin">
+    <div class="grid-2">
+      <div style="padding-right: 6mm;">
+        <div class="pill pill-terracotta">Installation Overview</div>
+        <div class="section-headline">A tree that tells stories.</div>
+        <div class="body-text" style="margin-bottom: 4mm;">
+          KaavadBits is a tabletop storytelling installation. The narrator is rendered as a tree — a recurring figure in Panchatantra settings. A servo-motor canopy oscillates during narration to direct attention; an LED matrix lights the currently active story path.
+        </div>
+        <div style="background:var(--c-white); border:1px solid var(--c-border); border-radius: 4mm; padding: 3mm; height: 80mm;">
+          <img src="media/KaavadBits/installation1.png" class="img-cover" style="border-radius: 2mm;">
+        </div>
+      </div>
+      <div>
+        <div class="pill pill-terracotta" style="margin-bottom: 4mm;">Interaction Flow</div>
+        
+        <div style="display:flex; flex-direction:column; gap:3mm; margin-bottom:4mm;">
+          <div style="display:flex; gap: 3mm; align-items:flex-start;">
+             <div class="font-inter" style="color:var(--c-terracotta); font-weight:700; font-size:11pt;">1.</div>
+             <div class="body-text" style="margin:0;">User opens the kivads and explores stories + characters.</div>
+          </div>
+          <div style="display:flex; gap: 3mm; align-items:flex-start;">
+             <div class="font-inter" style="color:var(--c-terracotta); font-weight:700; font-size:11pt;">2.</div>
+             <div class="body-text" style="margin:0;">Narrator greets the audience and requests patronage.</div>
+          </div>
+          <div style="display:flex; gap: 3mm; align-items:flex-start;">
+             <div class="font-inter" style="color:var(--c-terracotta); font-weight:700; font-size:11pt;">3.</div>
+             <div class="body-text" style="margin:0;">User places chosen story block on central NFC platform.</div>
+          </div>
+          <div style="display:flex; gap: 3mm; align-items:flex-start;">
+             <div class="font-inter" style="color:var(--c-terracotta); font-weight:700; font-size:11pt;">4.</div>
+             <div class="body-text" style="margin:0;">Narration begins. User places character figurines at prompted moments.</div>
+          </div>
+          <div style="display:flex; gap: 3mm; align-items:flex-start;">
+             <div class="font-inter" style="color:var(--c-terracotta); font-weight:700; font-size:11pt;">5.</div>
+             <div class="body-text" style="margin:0;">At branching points, user pulls a hanging root to commit to a story path.</div>
+          </div>
+        </div>
+        
+        <div style="background:var(--c-white); border:1px solid var(--c-border); border-radius: 4mm; padding: 3mm; height: 50mm;">
+          <img src="media/KaavadBits/interaction-flow2.jpg" class="img-cover" style="border-radius: 2mm;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P8 KaavadBits Outcomes -->
+<div class="page">
+  <div class="p-margin">
+    <div class="pill pill-terracotta" style="margin-bottom: 6mm;">Key Findings & Outcomes</div>
+    
+    <div class="grid-2">
+      <div style="padding-right: 6mm;">
+        <div class="section-headline" style="font-size:20pt; margin-top:0;">What the study revealed.</div>
+        <div class="body-text">
+          Users found the physical interaction model intuitive and engaging with no prior instruction. The installation successfully sparked genuine cultural interest in a tradition most participants had never encountered.
+        </div>
+        <div class="body-text" style="margin-bottom: 6mm;">
+          Long-term engagement was flagged as a potential weak point. This pivoted our future direction toward a pedagogical tool for children — for whom folklore repetition is a natural learning mechanism.
+        </div>
+        
+        <div class="pill pill-amber-fill" style="margin-bottom: 4mm;">Publications & Awards</div>
+        <div style="margin-bottom: 4mm; border-left: 2px solid var(--c-amber); padding-left: 4mm;">
+          <div class="font-inter" style="font-weight:700; font-size:10pt;">ACM TEI '24</div>
+          <div class="font-inter c-mid" style="font-size: 8.5pt;">ACM International Conference on Tangible, Embedded, and Embodied Interaction.</div>
+        </div>
+        <div style="border-left: 2px solid var(--c-amber); padding-left: 4mm;">
+          <div class="font-inter" style="font-weight:700; font-size:10pt;">IndiaHCI '23</div>
+          <div class="font-inter c-mid" style="font-size: 8.5pt;">Special Mention Award — indigenous storytelling practices.</div>
+        </div>
+      </div>
+      
+      <div style="display:flex; flex-direction:column; gap:4mm;">
+        <div style="background:var(--c-white); border:1px solid var(--c-border); border-radius: 4mm; padding: 6mm 4mm; text-align:center;">
+          <div class="font-lora c-primary-warm" style="font-size: 32pt; font-weight: 600; line-height: 1;">78.75</div>
+          <div class="font-inter c-mid" style="font-size:8pt; text-transform:uppercase; letter-spacing:0.1em; margin-top:2mm;">System Usability Scale Score</div>
+        </div>
+        <div style="background:var(--c-white); border:1px solid var(--c-border); border-radius: 4mm; padding: 6mm 4mm; text-align:center;">
+          <div class="font-lora c-primary-warm" style="font-size: 32pt; font-weight: 600; line-height: 1;">75%</div>
+          <div class="font-inter c-mid" style="font-size:8pt; text-transform:uppercase; letter-spacing:0.1em; margin-top:2mm;">No prior knowledge of Kaavad</div>
+        </div>
+        <div style="background:var(--c-white); border:1px solid var(--c-border); border-radius: 4mm; padding: 6mm 4mm; text-align:center;">
+          <div class="font-lora c-primary-warm" style="font-size: 32pt; font-weight: 600; line-height: 1;">100%</div>
+          <div class="font-inter c-mid" style="font-size:8pt; text-transform:uppercase; letter-spacing:0.1em; margin-top:2mm;">Interest in heritage interactive art</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P9 PWT Title -->
+<div class="page" style="background: #1A1A1A;">
+  <div class="pos-abs inset-0"><img src="media/playwatchtell/heroimage.png" class="img-cover"></div>
+  <div class="pos-abs inset-0 ts-overlay" style="background: linear-gradient(90deg, rgba(26,26,26,0.95), rgba(26,26,26,0.5), rgba(26,26,26,0));"></div>
+  <div class="p-margin" style="position:relative; z-index:10; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+    <div style="display:flex; gap:3mm; margin-bottom:8mm;">
+      <span class="pill" style="border: 1px solid rgba(255,255,255,0.4); color:#fff;">Design Research</span>
+      <span class="pill" style="border: 1px solid rgba(255,255,255,0.4); color:#fff;">Cultural Heritage</span>
+    </div>
+    <div class="font-lora c-white" style="font-size: 52pt; font-weight: 500; margin-bottom: 2mm; line-height:1.1;">Playing,<br>Watching,<br>Telling.</div>
+    <div class="font-inter c-white" style="font-size: 13pt; opacity: 0.7; max-width: 120mm; line-height: 1.6; margin-top:6mm;">
+      Reinterpreting Indian Vernacular Cultures and Artefacts through Digital New Media
+    </div>
+  </div>
+  <div class="ts-meta-bar" style="background: rgba(0,0,0,0.8);">
+    <span><strong>Year:</strong> 2023–2024</span>
+    <span><strong>Type:</strong> Research Framework</span>
+    <span><strong>Role:</strong> Lead Researcher & Designer</span>
+  </div>
+</div>
+
+<!-- P10 PWT Problem -->
+<div class="page" style="background:#FBF9F6;">
+  <div class="p-margin">
+    <div class="grid-2">
+      <div style="padding-right: 6mm; border-right: 1px solid var(--c-border);">
+        <div class="pill pill-terracotta">The Problem</div>
+        <div class="section-headline">They are not dying because they are undocumented.</div>
+        <div class="body-text">
+          Indian vernacular artefacts — the Rajasthani Kaavad, the street Bioscope, the seven-stone game of Lagori — are vanishing not because they lack archives, but because they are no longer experienced.
+        </div>
+        <div class="body-text">
+          A 3D scan cannot capture the soul of the Kaavad. A YouTube upload strips the Bioscope of its shared gaze. Uploading is not preserving. This project reframes heritage as an experiential problem — not an archival one.
+        </div>
+        <div class="pull-quote">
+          <p>"To keep vernacular culture alive, we must design tools that allow us not just to look at the past, but to continuously perform it."</p>
+        </div>
+      </div>
+      <div style="padding-left: 6mm;">
+        <div class="pill pill-terracotta" style="margin-bottom: 6mm;">Three Design Principles</div>
+        
+        <div style="margin-bottom: 6mm;">
+          <div class="font-inter c-primary-warm" style="font-weight:700; font-size:10.5pt;">01 / Ritual Gesture as Interface</div>
+          <div class="body-text" style="font-size:9pt; margin-top:1mm;">The interaction must mirror the cultural act. Pulling a root to branch a narrative. Stacking stones. The gesture precedes the content in significance.</div>
+        </div>
+        <div style="margin-bottom: 6mm;">
+          <div class="font-inter c-primary-warm" style="font-weight:700; font-size:10.5pt;">02 / Affective Fidelity over Visual</div>
+          <div class="body-text" style="font-size:9pt; margin-top:1mm;">Preserve the emotional and somatic memory of an artefact — the anticipation, the weight, the effort — rather than creating hyper-realistic visual simulations.</div>
+        </div>
+        <div>
+          <div class="font-inter c-primary-warm" style="font-weight:700; font-size:10.5pt;">03 / The Social Contract</div>
+          <div class="body-text" style="font-size:9pt; margin-top:1mm;">Artefacts dictate how we interact with each other. A Bioscope requires shared focus. A Kaavad requires narrator and patron. Heritage design means designing for collective memory.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P11 PWT Work -->
+<div class="page" style="background:#FBF9F6;">
+  <div class="p-margin" style="display:flex; flex-direction:column; justify-content:space-between;">
+    <div>
+      <div class="pill pill-terracotta" style="margin-bottom: 4mm;">Three Responses to One Question</div>
+      <div class="section-headline" style="font-size:20pt; margin-top:0; margin-bottom:8mm;">Same research thesis. Three very different forms.</div>
+      
+      <div class="grid-3">
+        <!-- Item 1 -->
+        <div style="display:flex; flex-direction:column;">
+          <div style="height: 40mm; border-radius:3mm; overflow:hidden; background:var(--c-border); margin-bottom:3mm;">
+             <img src="media/playwatchtell/kaavadbits.png" class="img-cover">
+          </div>
+          <div>
+             <span class="font-inter c-white" style="font-size:7pt; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; background:var(--c-terracotta); padding:1mm 2mm; border-radius:2mm;">✦ Completed</span>
+             <div class="font-inter c-charcoal" style="font-weight:700; font-size:12pt; margin-top:2mm;">KaavadBits</div>
+             <div class="font-inter c-mid" style="font-size:8.5pt; font-weight:500; margin-bottom:2mm;">Narrative Branching through Tangible Play</div>
+             <div class="body-text" style="font-size:8.5pt; margin:0;">A reinterpretation of the Kaavad Baachana tradition. Users pull hanging roots to branch through fables. Published at ACM TEI '24</div>
+          </div>
+        </div>
+        
+        <!-- Item 2 -->
+        <div style="display:flex; flex-direction:column;">
+          <div style="height: 40mm; border-radius:3mm; overflow:hidden; background:var(--c-border); margin-bottom:3mm;">
+             <img src="media/playwatchtell/vrlagori.jpg" class="img-cover">
+          </div>
+          <div>
+             <span class="font-inter c-amber" style="font-size:7pt; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; border:1px solid var(--c-amber); padding:1mm 2mm; border-radius:2mm;">⟳ In Development</span>
+             <div class="font-inter c-charcoal" style="font-weight:700; font-size:12pt; margin-top:2mm;">VR Lagori: The Nostalgic Stack</div>
+             <div class="font-inter c-mid" style="font-size:8.5pt; font-weight:500; margin-bottom:2mm;">Activating Somatic Motor Memory</div>
+             <div class="body-text" style="font-size:8.5pt; margin:0;">A poetic VR reimagining of the street game. Uses full-body movement and memory echoes to evoke childhood nostalgia.</div>
+          </div>
+        </div>
+        
+        <!-- Item 3 -->
+        <div style="display:flex; flex-direction:column;">
+          <div style="height: 40mm; border-radius:3mm; overflow:hidden; background:var(--c-border); margin-bottom:3mm;">
+             <img src="media/playwatchtell/vrbioscope.png" class="img-cover">
+          </div>
+          <div>
+             <span class="font-inter c-mid" style="font-size:7pt; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; border:1px solid #aaa; padding:1mm 2mm; border-radius:2mm;">◌ Proposed</span>
+             <div class="font-inter c-charcoal" style="font-weight:700; font-size:12pt; margin-top:2mm;">VR Bioscope</div>
+             <div class="font-inter c-mid" style="font-size:8.5pt; font-weight:500; margin-bottom:2mm;">Restoring the Collaborative Gaze</div>
+             <div class="body-text" style="font-size:8.5pt; margin:0;">A hybrid physical-VR artefact. Animation triggers only through the collaborative gaze of 2–3 users, restoring the social ritual.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="font-lora c-mid" style="text-align:center; font-style:italic; font-size:13pt; margin-top:4mm;">
+      "Nostalgia is not a surface aesthetic. It is a primary interaction modality."
+    </div>
+  </div>
+</div>
+
+<!-- P12 VR Lagori Title -->
+<div class="page">
+  <div class="pos-abs inset-0"><img src="media/vrlagori/heroimage.png" class="img-cover"></div>
+  <div class="pos-abs inset-0 ts-overlay" style="background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4), rgba(0,0,0,0));"></div>
+  <div class="p-margin" style="position:relative; z-index:10; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+    <div style="display:flex; gap:3mm; margin-bottom:8mm;">
+      <span class="pill" style="background:#fff; color:var(--c-terracotta);">XR / VR Design</span>
+      <span class="pill" style="background:#fff; color:var(--c-terracotta);">Embodied Play</span>
+    </div>
+    <div class="font-lora c-white" style="font-size: 52pt; font-weight: 500; margin-bottom: 2mm;">VR Lagori</div>
+    <div class="font-inter c-white" style="font-size: 15pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6mm;">The Nostalgic Stack</div>
+    <div class="font-inter c-white" style="font-size: 11pt; opacity: 0.7; max-width: 120mm; line-height: 1.6;">
+      Reimagining a traditional childhood game as a poetic, interactive memory space — where rules guide emotion.
+    </div>
+  </div>
+  <div class="ts-meta-bar">
+    <span><strong>Year:</strong> 2024</span>
+    <span><strong>Status:</strong> In Development</span>
+    <span><strong>Role:</strong> Designer & Developer</span>
+    <span><strong>Tools:</strong> Unity · Meta Quest</span>
+  </div>
+</div>
+
+<!-- P13 VR Lagori Design -->
+<div class="page">
+  <div class="p-margin">
+    <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap: 8mm; height:100%;">
+      <div style="display:flex; flex-direction:column;">
+        <div class="pill pill-terracotta" style="align-self:flex-start;">Core Goal</div>
+        <div class="section-headline">Not a game. A memory.</div>
+        <div class="body-text">
+          Lagori is a seven-stone street game played by South Asian children for generations. As urbanization erodes the physical spaces of play, the game has vanished from city childhoods. VR Lagori does not simulate this game — it reimagines it as a memory space where physical action unlocks somatic recall.
+        </div>
+        <div class="body-text" style="margin-bottom: 6mm;">
+          Actions like bending, reaching, and stacking become triggers for autobiographical memory. The experience relies on the body knowing what the mind has almost forgotten.
+        </div>
+        <div class="pill pill-terracotta" style="align-self:flex-start; margin-bottom: 4mm;">Why Extended Reality?</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4mm;">
+          <div>
+            <div class="font-inter c-charcoal" style="font-weight:700; font-size:10pt;">Embodiment</div>
+            <div class="body-text" style="font-size:8.5pt; margin-top:1mm;">The player's body is the controller. Standing and reaching activate muscle memory in ways a screen never could.</div>
+          </div>
+          <div>
+            <div class="font-inter c-charcoal" style="font-weight:700; font-size:10pt;">Spatial Presence</div>
+            <div class="body-text" style="font-size:8.5pt; margin-top:1mm;">You physically occupy a human-scale childhood environment — you don't watch it on a display, you inhabit it.</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column;">
+        <div class="pill pill-terracotta" style="align-self:flex-start; margin-bottom: 4mm;">Interaction Design</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4mm; flex:1;">
+          <div style="background:var(--c-white); padding: 4mm; border:1px solid var(--c-border); border-radius:3mm; display:flex; flex-direction:column; justify-content:center;">
+            <div class="font-inter c-primary-warm" style="font-size:16pt; font-weight:700; margin-bottom:1mm;">01</div>
+            <div class="font-inter c-charcoal" style="font-size:10pt; font-weight:700; margin-bottom:1mm;">Movement</div>
+            <div class="body-text" style="font-size:8pt; margin:0;">Natural locomotion. Slow-paced walking encourages reflection over speed.</div>
+          </div>
+          <div style="background:var(--c-white); padding: 4mm; border:1px solid var(--c-border); border-radius:3mm; display:flex; flex-direction:column; justify-content:center;">
+            <div class="font-inter c-primary-warm" style="font-size:16pt; font-weight:700; margin-bottom:1mm;">02</div>
+            <div class="font-inter c-charcoal" style="font-size:10pt; font-weight:700; margin-bottom:1mm;">Gesture</div>
+            <div class="body-text" style="font-size:8pt; margin:0;">Reaching, grabbing, and rotating worn stones — precision alignment required.</div>
+          </div>
+          <div style="background:var(--c-white); padding: 4mm; border:1px solid var(--c-border); border-radius:3mm; display:flex; flex-direction:column; justify-content:center;">
+            <div class="font-inter c-primary-warm" style="font-size:16pt; font-weight:700; margin-bottom:1mm;">03</div>
+            <div class="font-inter c-charcoal" style="font-size:10pt; font-weight:700; margin-bottom:1mm;">Gaze</div>
+            <div class="body-text" style="font-size:8pt; margin:0;">No explicit UI. Attention guided by paths and stone counters on palm.</div>
+          </div>
+          <div style="background:var(--c-white); padding: 4mm; border:1px solid var(--c-border); border-radius:3mm; display:flex; flex-direction:column; justify-content:center;">
+            <div class="font-inter c-primary-warm" style="font-size:16pt; font-weight:700; margin-bottom:1mm;">04</div>
+            <div class="font-inter c-charcoal" style="font-size:10pt; font-weight:700; margin-bottom:1mm;">Body</div>
+            <div class="body-text" style="font-size:8pt; margin:0;">Standing up from a chair initiates the experience. Agency is physical.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P14 VR Lagori Outcomes -->
+<div class="page">
+  <div class="p-margin" style="display:flex; flex-direction:column; justify-content:space-between;">
+    <div>
+      <div class="pill pill-terracotta" style="margin-bottom: 4mm;">The Narrative Arc</div>
+      <div style="display:flex; background:var(--c-white); border:1px solid var(--c-border); border-radius:4mm; margin-bottom:6mm; overflow:hidden;">
+        <div style="flex:1; padding:3mm; border-right:1px solid var(--c-border);">
+          <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9pt;">I / Arrival</div>
+          <div class="body-text" style="font-size:8pt; margin-top:1mm;">Warm, nostalgic backyard.</div>
+        </div>
+        <div style="flex:1; padding:3mm; border-right:1px solid var(--c-border);">
+          <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9pt;">II / Discovery</div>
+          <div class="body-text" style="font-size:8pt; margin-top:1mm;">A glowing path leads forward.</div>
+        </div>
+        <div style="flex:1; padding:3mm; border-right:1px solid var(--c-border);">
+          <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9pt;">III / The Stack</div>
+          <div class="body-text" style="font-size:8pt; margin-top:1mm;">Precision stacking 7 stones.</div>
+        </div>
+        <div style="flex:1; padding:3mm; border-right:1px solid var(--c-border);">
+          <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9pt;">IV / The Ball</div>
+          <div class="body-text" style="font-size:8pt; margin-top:1mm;">An invitation appears.</div>
+        </div>
+        <div style="flex:1; padding:3mm;">
+          <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9pt;">V / Release</div>
+          <div class="body-text" style="font-size:8pt; margin-top:1mm;">Slow-motion throw. Joy.</div>
+        </div>
+      </div>
+      
+      <div class="grid-2" style="margin-bottom: 6mm;">
+        <div>
+          <div class="pill pill-terracotta" style="margin-bottom: 4mm;">Outcomes</div>
+          <div style="padding-bottom:3mm; border-bottom:1px solid var(--c-border); margin-bottom:3mm;">
+            <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9pt;">Somatic Memory</div>
+            <div class="body-text" style="font-size:8.5pt; margin:0;">Physical actions like bending reactivate long-dormant memories without narrative text.</div>
+          </div>
+          <div style="padding-bottom:3mm; border-bottom:1px solid var(--c-border); margin-bottom:3mm;">
+            <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9pt;">Intrinsic Reward</div>
+            <div class="body-text" style="font-size:8.5pt; margin:0;">No scores. The emotional payoff of the final throw is the only reward.</div>
+          </div>
+          <div>
+            <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9pt;">Spatial Art</div>
+            <div class="body-text" style="font-size:8.5pt; margin:0;">Moves from literal game simulation toward a spatial art installation grounded in play.</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:center;">
+          <div class="font-lora c-primary-dark" style="font-style:italic; font-size:16pt; text-align:center; line-height:1.4; padding:0 6mm;">
+            "VR Lagori preserves the invisible heritage of play by making the user physically perform the heritage."
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="grid-4" style="height: 48mm;">
+      <div style="border-radius:3mm; overflow:hidden; border:1px solid var(--c-border);"><img src="media/vrlagori/s1.png" class="img-cover"></div>
+      <div style="border-radius:3mm; overflow:hidden; border:1px solid var(--c-border);"><img src="media/vrlagori/s2.png" class="img-cover"></div>
+      <div style="border-radius:3mm; overflow:hidden; border:1px solid var(--c-border);"><img src="media/vrlagori/s3.png" class="img-cover"></div>
+      <div style="border-radius:3mm; overflow:hidden; border:1px solid var(--c-border);"><img src="media/vrlagori/s4.png" class="img-cover"></div>
+    </div>
+  </div>
+</div>
+
+<!-- P15 XR Sandbox Title -->
+<div class="page" style="background:#EFF8FB;">
+  <div class="pos-abs inset-0"><img src="media/XRSandbox/heroimage.jpg" class="img-cover"></div>
+  <div class="pos-abs inset-0 ts-overlay" style="background: linear-gradient(90deg, rgba(8,145,178,0.95), rgba(15,23,42,0.5), rgba(15,23,42,0));"></div>
+  <div class="p-margin" style="position:relative; z-index:10; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+    <div style="display:flex; gap:3mm; margin-bottom:8mm;">
+      <span class="pill" style="background:#fff; color:var(--c-cyan);">Speculative Design</span>
+      <span class="pill" style="background:#fff; color:var(--c-cyan);">Generative AI</span>
+      <span class="pill" style="background:#fff; color:var(--c-cyan);">Urban Design</span>
+    </div>
+    <div class="font-lora c-white" style="font-size: 52pt; font-weight: 500; margin-bottom: 2mm;">XR Sandbox</div>
+    <div class="font-inter c-white" style="font-size: 14pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 6mm;">Speculative Design & Real-Time AI Dialogue</div>
+    <div class="font-inter c-white" style="font-size: 11pt; opacity: 0.7; max-width: 120mm; line-height: 1.6;">
+      Exploring the fusion of tangible sand manipulation with high-throughput GenAI pipelines to reimagine citizen participation.
+    </div>
+  </div>
+  <div class="ts-meta-bar">
+    <span><strong>Year:</strong> 2024</span>
+    <span><strong>Lab:</strong> Creative Interfaces Lab</span>
+    <span><strong>Role:</strong> Researcher & Developer</span>
+  </div>
+</div>
+
+<!-- P16 XR Sandbox ARTS -->
+<div class="page" style="background:#fff;">
+  <div class="p-margin">
+    <div class="grid-2">
+      <div style="padding-right: 6mm; border-right: 1px solid var(--c-border);">
+        <div class="pill pill-cyan">Sub-Project 1 of 2</div>
+        <div class="section-headline">ARTS: AR Tabletop</div>
+        <div class="font-lora c-mid" style="font-size:11pt; font-style:italic; margin-bottom:4mm;">"How can a sandtable become a tool for citizen participation in urban design?"</div>
+        <div class="body-text">
+          ARTS bridges expert urban planning tools and citizen imagination. By combining a physical sandtable with tangible "Future Cards" as tokens, citizens visualize scenarios for parks and third spaces — powered by a Stable Diffusion pipeline.
+        </div>
+        <div class="body-text">
+          Token detection uses YOLOv8 + ArUco markers. Unity renders the digital twin. ComfyUI pipelines handle image generation, mathematically constrained to prevent hallucination of token counts.
+        </div>
+        
+        <div class="grid-2" style="margin-top:4mm; height:35mm;">
+          <div style="background:var(--c-sand); padding: 2mm; border:1px solid var(--c-border); border-radius:3mm;"><img src="media/XRSandbox/futurecards.png" class="img-contain" style="border-radius:2mm;"></div>
+          <div style="background:var(--c-sand); padding: 2mm; border:1px solid var(--c-border); border-radius:3mm;"><img src="media/XRSandbox/genai.png" class="img-cover" style="border-radius:2mm;"></div>
+        </div>
+      </div>
+      <div style="padding-left: 6mm;">
+        <div class="pill pill-cyan" style="background:var(--c-amber);">Sub-Project 2 of 2</div>
+        <div class="section-headline">Sculpting Intelligence</div>
+        <div class="font-lora c-mid" style="font-size:11pt; font-style:italic; margin-bottom:4mm;">Real-time dialogue between hand and algorithm.</div>
+        <div class="body-text">
+          Where ARTS uses tokens, Sculpting Intelligence uses the sand itself. A Kinect sensor captures the table's topography in real time. Our TouchDesigner pipeline converts elevation and slope data into dynamic heatmaps.
+        </div>
+        <div class="body-text">
+          These heatmaps guide StreamDiffusion to generate corresponding biomes: mountains, deserts, coasts — directly reflecting the sand. The loop closes as each image is projected back onto the sandtable surface.
+        </div>
+        <div style="background:var(--c-sand); padding: 2mm; border:1px solid var(--c-border); border-radius:3mm; margin-top:4mm; height: 35mm;">
+          <img src="media/XRSandbox/sandbox-realties.jpeg" class="img-cover" style="border-radius:2mm; object-position: center top;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P17 XR Sandbox Pipeline -->
+<div class="page" style="background:#fff;">
+  <div class="p-margin" style="display:flex; flex-direction:column;">
+    <div class="pill pill-cyan" style="margin-bottom: 4mm; align-self:flex-start;">Technical Pipeline</div>
+    <div class="section-headline" style="margin-top:0; margin-bottom: 6mm;">From sand to AI — in under 2 seconds.</div>
+    
+    <!-- Pipeline Diagram -->
+    <div style="display:flex; background:var(--c-sand); border:1px solid var(--c-border); border-radius:4mm; padding: 8mm; margin-bottom:8mm; align-items:flex-start; flex:1;">
+      
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; position:relative;">
+        <div style="width:100%; height:1px; background:var(--c-cyan); position:absolute; top:4mm; left:50%; z-index:1;"></div>
+        <div style="width:8mm; height:8mm; border-radius:50%; background:var(--c-cyan); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:10pt; font-family:'Inter'; position:relative; z-index:2;">1</div>
+        <div class="font-inter c-cyan" style="font-weight:700; font-size:10pt; margin-top:5mm; text-align:center;">Physical Capture</div>
+        <div class="body-text" style="font-size:9pt; text-align:center; padding:0 3mm; margin-top:2mm; max-width:50mm;">Kinect V2 captures Depth + IR. OpenCV reads ArUco. MediaPipe reads hands.</div>
+      </div>
+      
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; position:relative;">
+        <div style="width:100%; height:1px; background:var(--c-cyan); position:absolute; top:4mm; left:50%; z-index:1;"></div>
+        <div style="width:8mm; height:8mm; border-radius:50%; background:var(--c-cyan); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:10pt; font-family:'Inter'; position:relative; z-index:2;">2</div>
+        <div class="font-inter c-cyan" style="font-weight:700; font-size:10pt; margin-top:5mm; text-align:center;">Digital Mapping</div>
+        <div class="body-text" style="font-size:9pt; text-align:center; padding:0 3mm; margin-top:2mm; max-width:50mm;">Python streams coordinates to Unity via TCP/JSON. Digital twin aligns.</div>
+      </div>
+      
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; position:relative;">
+        <div style="width:100%; height:1px; background:var(--c-cyan); position:absolute; top:4mm; left:50%; z-index:1;"></div>
+        <div style="width:8mm; height:8mm; border-radius:50%; background:var(--c-cyan); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:10pt; font-family:'Inter'; position:relative; z-index:2;">3</div>
+        <div class="font-inter c-cyan" style="font-weight:700; font-size:10pt; margin-top:5mm; text-align:center;">Gen Synthesis</div>
+        <div class="body-text" style="font-size:9pt; text-align:center; padding:0 3mm; margin-top:2mm; max-width:50mm;">ComfyUI generates render from heatmap mapping + base prompt.</div>
+      </div>
+      
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; position:relative;">
+        <div style="width:8mm; height:8mm; border-radius:50%; background:var(--c-cyan); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:10pt; font-family:'Inter'; position:relative; z-index:2;">4</div>
+        <div class="font-inter c-cyan" style="font-weight:700; font-size:10pt; margin-top:5mm; text-align:center;">Proj Feedback</div>
+        <div class="body-text" style="font-size:9pt; text-align:center; padding:0 3mm; margin-top:2mm; max-width:50mm;">1920×1080 output projected back onto sandtable. Loop closed.</div>
+      </div>
+      
+    </div>
+    
+    <div class="pill pill-cyan" style="margin-bottom: 4mm; align-self:flex-start;">Future Work</div>
+    <div class="grid-2" style="height: auto;">
+      <div style="background:var(--c-sand); padding: 5mm; border:1px solid var(--c-border); border-radius:3mm;">
+        <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9.5pt; text-transform:uppercase; letter-spacing:0.1em; border-bottom:1px solid var(--c-border); padding-bottom:2mm; margin-bottom:2mm;">Expert Co-Design</div>
+        <div class="body-text" style="font-size:8.5pt; margin:0;">Conduct co-design workshops with Urban Design SMEs at SPA Delhi and IIT Delhi to validate and refine the ARTS prototype.</div>
+      </div>
+      <div style="background:var(--c-sand); padding: 5mm; border:1px solid var(--c-border); border-radius:3mm;">
+        <div class="font-inter c-primary-warm" style="font-weight:700; font-size:9.5pt; text-transform:uppercase; letter-spacing:0.1em; border-bottom:1px solid var(--c-border); padding-bottom:2mm; margin-bottom:2mm;">Environmental Sim</div>
+        <div class="body-text" style="font-size:8.5pt; margin:0;">Incorporate rain and erosion simulations using digital water shaders in Unity to show how the landscape evolves over time.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P18 Closing -->
+<div class="page" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+  <div class="p-margin" style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+    <div class="font-lora c-primary-dark" style="font-size: 42pt; font-weight: 500; text-align:center; margin-bottom: 6mm; line-height: 1.1;">Let's build what<br>comes next.</div>
+    <div class="body-text" style="text-align:center; font-size:11pt; max-width:120mm; margin-bottom: 12mm;">
+      I'm open to research collaborations, design internships, and conversations at the intersection of HCI, immersive media, and cultural design.
+    </div>
+    
+    <div style="display:flex; flex-direction:column; gap:3mm; font-family:'Inter'; font-size:10.5pt; color:var(--c-charcoal);">
+      <div style="display:flex; gap:8mm;"><span style="font-weight:600; width:25mm;">Email</span><span style="color:var(--c-mid);">adityapadmagirwar@gmail.com</span></div>
+      <div style="display:flex; gap:8mm;"><span style="font-weight:600; width:25mm;">LinkedIn</span><span style="color:var(--c-mid);">linkedin.com/in/adityapadmagirwar</span></div>
+      <div style="display:flex; gap:8mm;"><span style="font-weight:600; width:25mm;">GitHub</span><span style="color:var(--c-mid);">github.com/adityapadma</span></div>
+      <div style="display:flex; gap:8mm;"><span style="font-weight:600; width:25mm;">Behance</span><span style="color:var(--c-mid);">behance.com/adityapadma</span></div>
+      <div style="display:flex; gap:8mm;"><span style="font-weight:600; width:25mm;">Portfolio</span><span style="color:var(--c-mid);">adityapadma.github.io</span></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
