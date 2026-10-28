@@ -92,7 +92,8 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@tailwindcss/oxide",
-      "esbuild"
+      "esbuild",
+      "puppeteer"
     ],
     "overrides": {
       "vite": "6.3.5",

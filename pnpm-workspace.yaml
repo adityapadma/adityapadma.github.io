@@ -1,0 +1,14 @@
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - esbuild
+  - puppeteer
+
+allowBuilds:
+  '@tailwindcss/oxide': true
+  esbuild: true
+  puppeteer: true
+
+overrides:
+  vite: 6.3.5
+  '@types/react': ^18.3.28
+  '@types/react-dom': ^18.3.7
