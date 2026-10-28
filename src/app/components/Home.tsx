@@ -69,25 +69,23 @@ const interests = [
 ];
 
 const spotifyNowPlayingEmbedUrl =
-  "https://open.spotify.com/embed/track/11dFghVXANMlKmJXsNCbNl?utm_source=generator";
+  "https://open.spotify.com/embed/album/2fnkyn9EybagIoFJ7a13oz?utm_source=generator";
 
 const bookNowReading = {
-  title: "Stick Season",
-  author: "Noah Kahan",
-  firstPublished: 2022,
-  editionCount: null,
-  coverUrl: "https://covers.openlibrary.org/b/id/10313767-L.jpg",
-  sourceUrl: "https://openlibrary.org/works/OL20965973W/The_Midnight_Library",
+  title: "Normal People",
+  author: "Sally Rooney",
+  firstPublished: 2018,
+  editionCount: 28,
+  coverUrl: "https://covers.openlibrary.org/b/id/8794265-L.jpg",
+  sourceUrl: "https://openlibrary.org/works/OL20150260W/Normal_People",
 };
 
 const movieRecentlyWatched = {
-  title: "Teenage Sex and Death and Camp Miasma",
-  year: 2024,
-  cast: "",
-  posterUrl:
-    "https://image.tmdb.org/t/p/w500/6K2c9m66e771i9x2Kk9B67Yv5H.jpg",
-  sourceUrl:
-    "https://www.imdb.com/title/tt1092026/",
+  title: "Teenage Sex and Death at Camp Miasma",
+  year: 2026,
+  cast: "Hannah Einbinder, Gillian Anderson",
+  posterUrl: "/portfolio/media/teenage-sex-and-death-at-camp-miasma.jpg",
+  sourceUrl: "https://www.imdb.com/title/tt35298123/",
 };
 
 export function Home() {
@@ -343,7 +341,7 @@ export function Home() {
           </article>
         </div>
         <p style={{ margin: "0 0 0.5rem", color: "var(--ap-text-light)", fontSize: "0.88rem" }}>
-          Album I am listening to now: <strong>Paravaana EP by Chaar Diwari</strong>
+          Album I am listening to now: <strong>The Great Divide by Noah Kahan</strong>
         </p>
         <p style={{ margin: "0 0 0.5rem", color: "var(--ap-text-light)", fontSize: "0.88rem" }}>
           Now Playing:
@@ -352,7 +350,7 @@ export function Home() {
               data-testid="embed-iframe"
               title="Spotify now playing"
               style={{ borderRadius: "12px" }}
-              src="https://open.spotify.com/embed/album/5haaCvmWOSBI362b3NRdZk?utm_source=generator"
+              src={spotifyNowPlayingEmbedUrl}
               width="100%"
               height="352"
               frameBorder="0"
