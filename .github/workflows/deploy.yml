@@ -37,6 +37,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Approve builds
+        run: pnpm approve-builds
+
       - name: Build
         run: pnpm build
         # Vite outputs to /dist by default
