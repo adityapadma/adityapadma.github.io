@@ -72,21 +72,22 @@ const spotifyNowPlayingEmbedUrl =
   "https://open.spotify.com/embed/track/11dFghVXANMlKmJXsNCbNl?utm_source=generator";
 
 const bookNowReading = {
-  title: "The Midnight Library",
-  author: "Matt Haig",
-  firstPublished: 2020,
-  editionCount: 25,
+  title: "Stick Season",
+  author: "Noah Kahan",
+  firstPublished: 2022,
+  editionCount: null,
   coverUrl: "https://covers.openlibrary.org/b/id/10313767-L.jpg",
   sourceUrl: "https://openlibrary.org/works/OL20965973W/The_Midnight_Library",
 };
 
 const movieRecentlyWatched = {
-  title: "Paul",
-  year: 2011,
-  cast: "Simon Pegg, Nick Frost",
+  title: "Teenage Sex and Death and Camp Miasma",
+  year: 2024,
+  cast: "",
   posterUrl:
     "https://image.tmdb.org/t/p/w500/6K2c9m66e771i9x2Kk9B67Yv5H.jpg",
-  sourceUrl: "https://www.imdb.com/title/tt1092026/",
+  sourceUrl:
+    "https://www.imdb.com/title/tt1092026/",
 };
 
 export function Home() {
