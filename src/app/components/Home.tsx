@@ -153,10 +153,12 @@ export function Home() {
         }
         .media-cover {
           width: 100%;
-          height: 220px;
-          object-fit: cover;
+          height: 280px;
+          object-fit: contain;
+          object-position: center;
           display: block;
-          background: #eceff3;
+          padding: 0.5rem;
+          background: transparent;
         }
         .media-copy {
           padding: 0.8rem 0.85rem 0.95rem;
